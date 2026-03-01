@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
 const CHARACTERS = "01ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-=[]{}|;':,.<>/?";
@@ -24,12 +24,10 @@ export default function MatrixTextReveal({
 }: MatrixTextRevealProps) {
     const [displayText, setDisplayText] = useState(text);
     const [isCompleted, setIsCompleted] = useState(false);
-    const [isAnimating, setIsAnimating] = useState(false);
 
     useEffect(() => {
         if (isActive) {
             setIsCompleted(false);
-            setIsAnimating(true);
             let iteration = 0;
             const totalIterations = text.length;
             const intervalMs = (duration * 1000) / totalIterations;
@@ -54,17 +52,15 @@ export default function MatrixTextReveal({
                 if (iteration >= text.length) {
                     clearInterval(interval);
                     setIsCompleted(true);
-                    setIsAnimating(false);
                 }
             }, intervalMs);
 
             return () => clearInterval(interval);
         } else {
             setIsCompleted(false);
-            setIsAnimating(false);
             setDisplayText(text);
         }
-    }, [isActive, text]);
+    }, [isActive, text, duration]);
 
     return (
         <motion.div
