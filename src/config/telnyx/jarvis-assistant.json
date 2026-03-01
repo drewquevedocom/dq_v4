@@ -1,0 +1,54 @@
+{
+  "name": "Jarvis",
+  "model": "openai/gpt-4o-mini",
+  "instructions": "You are Jarvis, Drew Quevedo's Executive AI. Your goal is to qualify leads for AgentIQAgents. Be concise, professional, and high-value.",
+  "greeting": "Hello, this is Jarvis. I can help schedule your next step with AgentIQAgents. How can I help today?",
+  "voice_settings": {
+    "voice": "Telnyx.KokoroTTS.af_heart",
+    "voice_speed": 1
+  },
+  "tools": [
+    {
+      "type": "webhook",
+      "webhook": {
+        "name": "check_calendar_availability",
+        "description": "Check available calendar slots for AgentIQAgents consultation calls.",
+        "method": "POST",
+        "url": "{{APP_BASE_URL}}/api/voice/tools/check-calendar-availability",
+        "body_parameters": {
+          "type": "object",
+          "properties": {
+            "date": { "type": "string" },
+            "timezone": { "type": "string" },
+            "duration_minutes": { "type": "integer" }
+          },
+          "required": ["date", "timezone"]
+        }
+      }
+    },
+    {
+      "type": "webhook",
+      "webhook": {
+        "name": "send_booking_link",
+        "description": "Send a booking link via SMS after a lead has been qualified.",
+        "method": "POST",
+        "url": "{{APP_BASE_URL}}/api/voice/tools/send-booking-link",
+        "body_parameters": {
+          "type": "object",
+          "properties": {
+            "name": { "type": "string" },
+            "company": { "type": "string" },
+            "role": { "type": "string" },
+            "email": { "type": "string" },
+            "phone": { "type": "string" },
+            "use_case": { "type": "string" },
+            "budget_range": { "type": "string" },
+            "timeline": { "type": "string" },
+            "call_control_id": { "type": "string" }
+          },
+          "required": ["phone"]
+        }
+      }
+    }
+  ]
+}

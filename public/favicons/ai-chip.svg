@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <g fill="none" stroke="#6f2ca7" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="28" y="26" width="72" height="76" rx="14" stroke-width="6"/>
+    <rect x="40" y="38" width="48" height="52" rx="8" stroke-width="4"/>
+    <path d="M52 62h24" stroke-width="4"/>
+    <path d="M56 52v20M72 52v20" stroke-width="4" opacity="0"/>
+    <path d="M24 38h-8M24 54h-10M24 70h-10M24 86h-8" stroke-width="4"/>
+    <path d="M104 38h8M104 54h10M104 70h10M104 86h8" stroke-width="4"/>
+    <path d="M40 20v-8M56 20v-10M72 20v-10M88 20v-8" stroke-width="4"/>
+    <path d="M40 108v8M56 108v10M72 108v10M88 108v8" stroke-width="4"/>
+  </g>
+  <text x="64" y="72" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#6f2ca7">AI</text>
+</svg>

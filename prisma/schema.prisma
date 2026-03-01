@@ -1,0 +1,131 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+enum VoiceCallStatus {
+  INITIATED
+  ANSWERED
+  IN_PROGRESS
+  ENDED
+  FAILED
+}
+
+enum HitlActionType {
+  SEND_BOOKING_LINK
+}
+
+enum HitlRequestStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  SENT
+  FAILED
+}
+
+model Lead {
+  id          String   @id @default(cuid())
+  name        String?
+  company     String?
+  role        String?
+  email       String?
+  phone       String?
+  useCase     String?
+  budgetRange String?
+  timeline    String?
+  source      String?
+  notes       String?
+  metadata    Json?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  voiceCalls    VoiceCall[]
+  hitlRequests  HitlRequest[]
+
+  @@index([email])
+  @@index([phone])
+  @@index([createdAt])
+}
+
+model VoiceCall {
+  id                    String         @id @default(cuid())
+  externalCallControlId String         @unique
+  externalCallLegId     String?
+  externalCallSessionId String?
+  status                VoiceCallStatus @default(INITIATED)
+  fromNumber            String?
+  toNumber              String?
+  startedAt             DateTime?
+  endedAt               DateTime?
+  durationSeconds       Int?
+  assistantId           String?
+  conversationId        String?
+  rawLastEvent          Json?
+  createdAt             DateTime       @default(now())
+  updatedAt             DateTime       @updatedAt
+
+  leadId String?
+  lead   Lead? @relation(fields: [leadId], references: [id], onDelete: SetNull)
+
+  webhookEvents VoiceWebhookEvent[]
+  hitlRequests  HitlRequest[]
+
+  @@index([externalCallLegId])
+  @@index([externalCallSessionId])
+  @@index([status])
+}
+
+model VoiceWebhookEvent {
+  id               String   @id @default(cuid())
+  externalEventId  String?  @unique
+  eventType        String
+  occurredAt       DateTime?
+  payload          Json
+  processingStatus String   @default("RECEIVED")
+  errorMessage     String?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  voiceCallId String?
+  voiceCall   VoiceCall? @relation(fields: [voiceCallId], references: [id], onDelete: SetNull)
+
+  @@index([eventType])
+  @@index([processingStatus])
+}
+
+model HitlRequest {
+  id               String            @id @default(cuid())
+  actionType       HitlActionType
+  status           HitlRequestStatus @default(PENDING)
+  destinationPhone String
+  smsBody          String
+  bookingUrl       String
+  requestedBy      String?
+  requestPayload   Json?
+  approvedBy       String?
+  approvedAt       DateTime?
+  rejectedBy       String?
+  rejectedAt       DateTime?
+  rejectionReason  String?
+  sentAt           DateTime?
+  failedAt         DateTime?
+  telnyxMessageId  String?
+  errorMessage     String?
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+
+  leadId String?
+  lead   Lead? @relation(fields: [leadId], references: [id], onDelete: SetNull)
+
+  voiceCallId String?
+  voiceCall   VoiceCall? @relation(fields: [voiceCallId], references: [id], onDelete: SetNull)
+
+  @@index([status])
+  @@index([actionType])
+  @@index([createdAt])
+}
