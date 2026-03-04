@@ -123,7 +123,7 @@ export default function Capabilities() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          viewport={{ once: true, margin: "-10% 0px" }}
+          viewport={{ once: true, margin: "0px" }}
           className="mb-16 text-center md:mb-20"
         >
           <span className="neo-chip">Capabilities Stack</span>
@@ -143,7 +143,7 @@ export default function Capabilities() {
           />
         </motion.div>
 
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-4">
+        <div className="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-8 md:pb-12 scrollbar-hide py-4 px-2">
           {SKILL_CATEGORIES.map((category, index) => (
             <motion.article
               key={category.id}
@@ -151,7 +151,7 @@ export default function Capabilities() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.45, delay: index * 0.08 }}
               viewport={{ once: true, margin: "-8% 0px" }}
-              className="neo-card group relative overflow-hidden p-6 md:p-7"
+              className="neo-card group relative overflow-hidden p-6 md:p-7 min-w-[320px] max-w-[380px] w-[85vw] snap-center flex-shrink-0"
             >
               <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(70,204,255,0.2),transparent_55%)]" />

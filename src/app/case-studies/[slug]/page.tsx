@@ -46,6 +46,14 @@ export default function CaseStudyPage() {
       <div className="pointer-events-none fixed inset-0 z-[1] neo-grid" />
       <Header />
 
+      {/* SEO/GEO Metadata injection if provided by the project */}
+      {project.seoSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: project.seoSchema }}
+        />
+      )}
+
       <article className="relative z-10 px-4 pb-24 pt-28 md:px-8 md:pt-36">
         <div className="mx-auto max-w-4xl">
           <Link
@@ -118,28 +126,37 @@ export default function CaseStudyPage() {
             ))}
           </motion.div>
 
-          {/* Content Sections */}
-          <div className="mt-16 space-y-14">
-            {[
-              { title: "The Challenge", content: project.challenge },
-              { title: "The Solution", content: project.solution },
-              { title: "The Outcome", content: project.outcome },
-            ].map((section, i) => (
-              <motion.section
-                key={section.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: i * 0.06 }}
-                viewport={{ once: true, margin: "-10% 0px" }}
-              >
-                <h2 className="font-display text-3xl uppercase tracking-wide text-[var(--fg-0)] md:text-4xl">
-                  {section.title}
-                </h2>
-                <p className="mt-4 font-body text-base leading-relaxed text-[var(--fg-1)]">
-                  {section.content}
-                </p>
-              </motion.section>
-            ))}
+          {/* Content Sections or Full Rich HTML Content */}
+          <div className="mt-16">
+            {project.fullContent ? (
+              <div
+                className="prose prose-invert max-w-none text-[var(--fg-1)] prose-headings:font-display prose-headings:text-white prose-a:text-[var(--accent-cyan)] prose-strong:text-white prose-img:rounded-xl prose-img:shadow-2xl"
+                dangerouslySetInnerHTML={{ __html: project.fullContent }}
+              />
+            ) : (
+              <div className="space-y-14">
+                {[
+                  { title: "The Challenge", content: project.challenge },
+                  { title: "The Solution", content: project.solution },
+                  { title: "The Outcome", content: project.outcome },
+                ].map((section, i) => (
+                  <motion.section
+                    key={section.title}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: i * 0.06 }}
+                    viewport={{ once: true, margin: "-10% 0px" }}
+                  >
+                    <h2 className="font-display text-3xl uppercase tracking-wide text-[var(--fg-0)] md:text-4xl">
+                      {section.title}
+                    </h2>
+                    <p className="mt-4 font-body text-base leading-relaxed text-[var(--fg-1)]">
+                      {section.content}
+                    </p>
+                  </motion.section>
+                ))}
+              </div>
+            )}
           </div>
 
           {/* Bottom CTAs */}

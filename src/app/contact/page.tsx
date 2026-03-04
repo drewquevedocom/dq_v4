@@ -43,7 +43,7 @@ export default function ContactPage() {
               Let&apos;s Talk
             </h1>
             <p className="mt-3 font-body text-sm leading-relaxed text-[var(--fg-1)] md:text-base">
-              Send your message and we will respond with next steps. For scheduling, use the Book Strategy questionnaire.
+              Send your message and I will respond with next steps. For scheduling, use the Book Strategy questionnaire.
             </p>
 
             <form onSubmit={onSubmit} className="mt-6 grid gap-4">
@@ -79,17 +79,17 @@ export default function ContactPage() {
               <p>
                 <span className="font-tech uppercase tracking-widest text-white/70">Email</span>
                 <br />
-                hello@drewquevedo.com
+                dq@drewquevedo.com
               </p>
               <p>
                 <span className="font-tech uppercase tracking-widest text-white/70">Phone</span>
                 <br />
-                +1 (555) 000-0000
+                +1 (818) 213-1225
               </p>
               <p>
                 <span className="font-tech uppercase tracking-widest text-white/70">Hours</span>
                 <br />
-                Monday to Friday, 9:00 AM - 6:00 PM PST
+                Monday to Friday, 10:00 AM - 4:00 PM PST
               </p>
               <p>
                 <span className="font-tech uppercase tracking-widest text-white/70">Location</span>

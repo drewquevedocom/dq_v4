@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { ExternalLink } from "lucide-react";
 import type { Project } from "@/data/portfolio";
@@ -19,21 +20,37 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
       viewport={{ once: true, margin: "-8% 0px" }}
       className="neo-card group relative flex flex-col overflow-hidden"
     >
-      <div className="relative aspect-[16/9] w-full overflow-hidden bg-[var(--bg-2)]">
-        <div
-          className="absolute inset-0 opacity-30"
-          style={{
-            background: `linear-gradient(135deg, ${project.accentColor}22 0%, transparent 60%)`,
-          }}
-        />
-        <div className="absolute inset-0 flex items-center justify-center">
-          <span
-            className="font-display text-6xl font-bold uppercase tracking-tight opacity-[0.07]"
-            style={{ color: project.accentColor }}
-          >
-            {project.title.split(" ")[0]}
-          </span>
-        </div>
+      <div
+        className="relative aspect-[16/9] w-full overflow-hidden"
+        style={{ backgroundColor: project.imageBg || "var(--bg-2)" }}
+      >
+        {project.image ? (
+          <Image
+            src={project.image}
+            alt={project.title}
+            fill
+            className={`transition-transform duration-700 ease-in-out group-hover:scale-105 ${project.imageContain ? "object-contain p-8" : "object-cover"
+              }`}
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          />
+        ) : (
+          <>
+            <div
+              className="absolute inset-0 opacity-30"
+              style={{
+                background: `linear-gradient(135deg, ${project.accentColor}22 0%, transparent 60%)`,
+              }}
+            />
+            <div className="absolute inset-0 flex items-center justify-center">
+              <span
+                className="font-display text-6xl font-bold uppercase tracking-tight opacity-[0.07]"
+                style={{ color: project.accentColor }}
+              >
+                {project.title.split(" ")[0]}
+              </span>
+            </div>
+          </>
+        )}
       </div>
 
       <div className="flex flex-1 flex-col p-5 md:p-6">

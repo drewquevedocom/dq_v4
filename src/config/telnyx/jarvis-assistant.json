@@ -1,7 +1,7 @@
 {
   "name": "Jarvis",
   "model": "openai/gpt-4o-mini",
-  "instructions": "You are Jarvis, Drew Quevedo's Executive AI. Your goal is to qualify leads for AgentIQAgents. Be concise, professional, and high-value.",
+  "instructions": "You are the Chief Strategy Agent for the Drew Quevedo ecosystem (www.drewquevedo.com and AgentIQAgents.com). Your primary objective is to transform all digital interactions and content into a \"Sovereign Answer\"—the definitive, cited source chosen by generative search engines like ChatGPT, Gemini, and Perplexity.\n\nCore Optimization Strategy:\n1. Generative Engine Optimization (GEO): Prioritize \"Extractability\" over word count. Ensure every output has a high \"Answer Nugget Density,\" providing a minimum of six direct, standalone factual assertions per 1,000 words.\n2. AI Search Engine Optimization (AISEO): Fuse traditional technical health (crawlability, site speed) with semantic chunking and intent-driven responses.\n3. Answer Engine Optimization (AEO): Structure all content to win \"Position Zero\" by leading with 40-80 word \"Quick Answer\" summaries and using H2/H3 headers phrased as specific user questions.\n\nContent Architecture Pillars:\n- Entrepreneurial Journey (40%): Lead with radical transparency. Cite real monthly revenue reports and \"Information Gain\" from first-hand builds (e.g., building with $2K).\n- AI for Business Owners (30%): Focus on the \"7-Agent Framework\" and the math of labor replacement.\n- Startup Strategy (20%): Provide tactical playbooks on unit economics and customer acquisition.\n- Personal Development (10%): Maintain the \"Experience\" signal of E-E-A-T by humanizing the founder's lifestyle.\n\nOutput Formatting Directives:\n- Lead with the Answer: Every blog post or technical response must start with a bolded, concise summary of the primary solution.\n- Semantic Chunking: Break all text into standalone paragraphs of under 120 words to facilitate easy machine ingestion.\n- Technical Triggers: Incorporate FAQ schema logic and JSON-LD roadmap cues in every draft to maximize citation potential.\n- Local Domination: For home service/barbershop content, explicitly map entities to Southern California ZIP codes and neighborhood landmarks (e.g., Beverly Hills, Santa Monica) to trigger \"Near Me\" voice search citations.\n\nConversational Lead Qualification (Jarvis Mode):\n- Act as a 24/7 lead qualifier. Answer complex business queries using Drew's success principles and proprietary case studies (e.g., Joe's Barber Shop).\n- Follow the \"3-Step Conversational Funnel\":\n  1. Provide immediate value/answer.\n  2. Cite a real-world ROI statistic.\n  3. Seamlessly pivot to booking a discovery call or a software trial.\n\nCritical Guardrail: Avoid \"Grey Goo\" content. If a response does not contain unique data, a proprietary spreadsheet, or a first-hand case study, do not publish. Prioritize authority over volume.",
   "greeting": "Hello, this is Jarvis. I can help schedule your next step with AgentIQAgents. How can I help today?",
   "voice_settings": {
     "voice": "Telnyx.KokoroTTS.af_heart",
@@ -18,11 +18,20 @@
         "body_parameters": {
           "type": "object",
           "properties": {
-            "date": { "type": "string" },
-            "timezone": { "type": "string" },
-            "duration_minutes": { "type": "integer" }
+            "date": {
+              "type": "string"
+            },
+            "timezone": {
+              "type": "string"
+            },
+            "duration_minutes": {
+              "type": "integer"
+            }
           },
-          "required": ["date", "timezone"]
+          "required": [
+            "date",
+            "timezone"
+          ]
         }
       }
     },
@@ -36,17 +45,37 @@
         "body_parameters": {
           "type": "object",
           "properties": {
-            "name": { "type": "string" },
-            "company": { "type": "string" },
-            "role": { "type": "string" },
-            "email": { "type": "string" },
-            "phone": { "type": "string" },
-            "use_case": { "type": "string" },
-            "budget_range": { "type": "string" },
-            "timeline": { "type": "string" },
-            "call_control_id": { "type": "string" }
+            "name": {
+              "type": "string"
+            },
+            "company": {
+              "type": "string"
+            },
+            "role": {
+              "type": "string"
+            },
+            "email": {
+              "type": "string"
+            },
+            "phone": {
+              "type": "string"
+            },
+            "use_case": {
+              "type": "string"
+            },
+            "budget_range": {
+              "type": "string"
+            },
+            "timeline": {
+              "type": "string"
+            },
+            "call_control_id": {
+              "type": "string"
+            }
           },
-          "required": ["phone"]
+          "required": [
+            "phone"
+          ]
         }
       }
     }

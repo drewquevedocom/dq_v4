@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
@@ -15,10 +16,9 @@ type NavItem = {
 
 const NAV_ITEMS: NavItem[] = [
   { label: "Home", href: "/#home", sectionId: "home" },
-  { label: "Capabilities", href: "/#capabilities", sectionId: "capabilities" },
+  { label: "About", href: "/about" },
   { label: "Portfolio", href: "/portfolio" },
-  { label: "Contact", href: "/contact" },
-  { label: "Mission", href: "/dashboard" },
+  { label: "Blog", href: "/blog" },
 ];
 
 const getActiveSection = (sectionIds: string[]): string => {
@@ -41,6 +41,10 @@ const getActiveSection = (sectionIds: string[]): string => {
 export default function Header() {
   const [activeId, setActiveId] = useState("home");
   const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
+
+  const isSubpage = pathname !== "/";
+  const hasBackground = isSubpage || activeId !== "home";
 
   useEffect(() => {
     const sectionIds = NAV_ITEMS.map((item) => item.sectionId).filter(
@@ -72,7 +76,7 @@ export default function Header() {
 
   return (
     <>
-      <header className="fixed left-0 right-0 top-0 z-50 px-4 py-4 md:px-10 md:py-6">
+      <header className={`fixed left-0 right-0 top-0 z-50 px-4 py-4 md:px-10 md:py-6 transition-all duration-300 ${hasBackground ? "bg-[rgba(6,6,18,0.95)] backdrop-blur-md shadow-lg shadow-black/40" : ""}`}>
         <div className="mx-auto w-full max-w-[1520px] rounded-2xl bg-transparent px-3 py-2 md:px-6 md:py-4">
           <div className="flex items-center justify-between gap-4">
             {/* Logo */}
@@ -200,8 +204,8 @@ export default function Header() {
                           closeMenu();
                         }}
                         className={`flex items-center gap-3 rounded-xl px-4 py-3.5 font-tech text-sm font-semibold uppercase tracking-widest transition ${isActive
-                            ? "bg-[rgba(155,127,216,0.15)] text-[#D1C4E9]"
-                            : "text-white/70 hover:bg-white/5 hover:text-white"
+                          ? "bg-[rgba(155,127,216,0.15)] text-[#D1C4E9]"
+                          : "text-white/70 hover:bg-white/5 hover:text-white"
                           }`}
                       >
                         {isActive && (

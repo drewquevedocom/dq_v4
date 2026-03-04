@@ -8,7 +8,7 @@ export const STAGES: StageData[] = [
     assetType: "video",
     headline: "Before the Machine Learns, the Architect Must Breathe.",
     subHeadline:
-      "I build from stillness first, then scale with precision. After 23 years in digital engineering, I now design GEO, AI Strategy, and Conversion Systems that turn attention into booked conversations.",
+      "Welcome to the digital home of Drew Q. This is my personal hub for work, play, AI experiments, and everything in between. I build from stillness first, then scale with precision. After 23 years in the digital trenches, I now design GEO, AI Strategy, and Conversion Systems that turn attention into booked conversations.",
     directAnswer:
       "Drew Quevedo is a pioneer in GEO and AISEO, leveraging 23 years of digital media experience to build autonomous marketing systems. As the founder of AgentIQ Agency, he balances high-tech innovation with high-touch strategy to ensure brands dominate Google, ChatGPT, and Gemini recommendations.",
     primaryCTA: { label: "Initialize", href: "/contact" },

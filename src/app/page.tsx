@@ -11,6 +11,7 @@ import PortfolioTeaser from "@/components/portfolio/PortfolioTeaser";
 import TelemetryBeacon from "@/components/TelemetryBeacon";
 import SectionTitle from "@/components/ui/SectionTitle";
 import SectionSubtitle from "@/components/ui/SectionSubtitle";
+import RecentInsights from "@/components/ui/RecentInsights";
 import { trackEvent } from "@/lib/analytics";
 import { Globe, Instagram, Linkedin, Youtube } from "lucide-react";
 
@@ -29,6 +30,8 @@ export default function Home() {
       <Capabilities />
 
       <PortfolioTeaser />
+
+      <RecentInsights />
 
       <section
         id="contact"
@@ -71,118 +74,6 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="my-10 border-t border-white/10" />
-
-          <div className="grid gap-8 md:grid-cols-4">
-            <div>
-              <h3 className="font-display text-4xl uppercase tracking-tight text-white">Links</h3>
-              <ul className="mt-4 space-y-2 font-body text-sm text-white/80">
-                <li>
-                  <Link href="/contact" className="hover:text-white">
-                    Support
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/book-strategy" className="hover:text-white">
-                    Book Strategy
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/book-strategy" className="hover:text-white">
-                    Terms Of Use
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/contact" className="hover:text-white">
-                    Privacy Policy
-                  </Link>
-                </li>
-              </ul>
-            </div>
-
-            <div>
-              <h3 className="font-display text-4xl uppercase tracking-tight text-white">Sitemap</h3>
-              <ul className="mt-4 space-y-2 font-body text-sm text-white/80">
-                <li>
-                  <Link href="/#home" className="hover:text-white">
-                    Home
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/#capabilities" className="hover:text-white">
-                    Capabilities
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/portfolio" className="hover:text-white">
-                    My Work
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/contact" className="hover:text-white">
-                    Contact
-                  </Link>
-                </li>
-              </ul>
-            </div>
-
-            <div>
-              <h3 className="font-display text-4xl uppercase tracking-tight text-white">Contact</h3>
-              <div className="mt-4 space-y-2 font-body text-sm text-white/80">
-                <p>Drew Quevedo</p>
-                <p>Remote, United States</p>
-                <p>hello@drewquevedo.com</p>
-                <p>+1 (555) 000-0000</p>
-              </div>
-              <div className="mt-5 flex items-center gap-3 text-white/80">
-                <a
-                  href="https://drewquevedo.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-white"
-                  aria-label="Website"
-                >
-                  <Globe size={17} />
-                </a>
-                <a
-                  href="https://www.linkedin.com/in/drewquevedo"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-white"
-                  aria-label="LinkedIn"
-                >
-                  <Linkedin size={17} />
-                </a>
-                <a
-                  href="https://www.instagram.com/drewquevedo"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-white"
-                  aria-label="Instagram"
-                >
-                  <Instagram size={17} />
-                </a>
-                <a
-                  href="https://www.youtube.com/@drewquevedo"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-white"
-                  aria-label="YouTube"
-                >
-                  <Youtube size={17} />
-                </a>
-              </div>
-            </div>
-
-            <div className="md:justify-self-end">
-              <div className="font-display text-6xl uppercase tracking-tight text-white">DQ</div>
-              <p className="mt-5 font-body text-sm text-white/55">
-                © 2026 DREWQUEVEDO.COM
-                <br />
-                All Rights Reserved
-              </p>
-            </div>
-          </div>
         </div>
       </section>
 
