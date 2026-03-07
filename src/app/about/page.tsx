@@ -72,7 +72,7 @@ export default function AboutPage() {
                     {/* SEO/GEO Optimized Rich Content */}
                     <div className="prose prose-invert prose-lg max-w-none text-[var(--fg-1)] prose-headings:font-display prose-headings:text-white prose-a:text-[var(--accent-cyan)] prose-strong:text-white prose-img:rounded-xl prose-img:shadow-2xl">
                         <h1 className="text-4xl md:text-6xl uppercase tracking-tighter mb-8 leading-tight drop-shadow-lg">
-                            Drew Quevedo: Architecting the Sovereign Answer
+                            Drew Quevedo: AI Architecting One Business At A Time
                         </h1>
 
                         <p className="lead text-xl md:text-2xl text-[var(--fg-2)] font-body leading-relaxed border-l-4 border-[var(--accent-cyan)] pl-6 mb-12">
