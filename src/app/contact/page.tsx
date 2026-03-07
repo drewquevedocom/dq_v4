@@ -11,11 +11,12 @@ export default function ContactPage() {
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const formData = new FormData(event.currentTarget);
+    const form = event.currentTarget;
+    const formData = new FormData(form);
     const payload = Object.fromEntries(formData.entries());
     setLoading(true);
     try {
-      await fetch("/api/leads", {
+      const res = await fetch("/api/leads", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -23,9 +24,16 @@ export default function ContactPage() {
           source: "contact_page_form",
         }),
       });
-      setSubmitted(true);
-      trackEvent("contact_form_submit", { source: "contact_page" });
-      event.currentTarget.reset();
+
+      if (res.ok) {
+        setSubmitted(true);
+        trackEvent("contact_form_submit", { source: "contact_page" });
+        form.reset();
+      } else {
+        console.error("Failed to submit lead");
+      }
+    } catch (e) {
+      console.error(e);
     } finally {
       setLoading(false);
     }

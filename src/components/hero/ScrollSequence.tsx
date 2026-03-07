@@ -453,9 +453,9 @@ export default function ScrollSequence() {
             ref={(element) => {
               stagesRef.current[index] = element;
             }}
-            className={`absolute inset-0 flex flex-col items-center justify-end px-4 pb-16 sm:pb-10 text-center ${index === 0
-              ? "pt-0 sm:pt-0 md:pt-[196px] lg:pt-[210px]"
-              : "pt-0 sm:pt-0 md:pt-[204px] lg:pt-[218px]"
+            className={`absolute inset-0 flex flex-col items-center px-4 pb-6 sm:pb-8 md:pb-10 text-center ${index === 0
+              ? "pt-[15vh] sm:pt-[18vh] md:pt-[18vh] lg:pt-[16vh]"
+              : "pt-[15vh] sm:pt-[18vh] md:pt-[18vh] lg:pt-[16vh]"
               } ${index === 0 ? "opacity-100" : "pointer-events-none opacity-0"
               }`}
             style={
@@ -468,7 +468,7 @@ export default function ScrollSequence() {
 
             {index === 0 ? (
               <h1
-                className="max-w-[980px] font-tech text-[clamp(1.35rem,6.5vw,4.8rem)] md:text-[clamp(1.9rem,5vw,4.8rem)] uppercase leading-[0.9] tracking-tight text-white"
+                className="mb-8 md:mb-16 max-w-[1200px] xl:max-w-[1400px] w-full font-tech text-[clamp(1.3rem,8vw,5.7rem)] uppercase leading-[0.9] tracking-normal md:tracking-normal text-white"
                 style={{ textShadow: "2px 2px 4px rgba(0,0,0,0.8), 0 0 15px rgba(155, 127, 216, 0.4)" }}
               >
                 <div className="inline-block">
@@ -502,100 +502,102 @@ export default function ScrollSequence() {
                 active={activeStage === index}
                 split="words"
                 pulseWords={getPulseWordsForStage(stage.id)}
-                className="max-w-[1020px] font-tech text-[clamp(1.2rem,5.5vw,4.35rem)] uppercase leading-[0.9] tracking-tight text-white [text-shadow:0px_4px_12px_rgba(0,0,0,0.8)]"
+                className="mb-8 md:mb-16 max-w-[1200px] xl:max-w-[1400px] w-full font-tech text-[clamp(1.3rem,8vw,5.7rem)] uppercase leading-[0.9] tracking-normal md:tracking-normal text-white [text-shadow:0px_4px_12px_rgba(0,0,0,0.8)]"
               />
             )}
 
-            <div
-              className="mt-3 sm:mt-4 max-w-3xl rounded-2xl border border-white/10 bg-[#4B0082]/15 px-3 py-2 text-balance font-tech text-[0.72rem] sm:text-[0.85rem] leading-snug text-white backdrop-blur-md [text-shadow:0px_4px_12px_rgba(0,0,0,0.8)] md:px-6 md:py-5 md:text-[1.02rem]"
-              style={{
-                transform: `translate3d(0, calc(var(--stage-parallax, 0) * 14px), 0)`,
-                filter: "drop-shadow(0 2px 4px rgba(0,0,0,1))"
-              }}
-            >
-              <MatrixTextReveal
-                text={stage.subHeadline}
-                isActive={activeStage === index}
+            <div className="mt-auto flex w-full flex-col items-center">
+              <div
+                className="max-w-3xl rounded-2xl border border-white/10 bg-[#4B0082]/15 px-3 py-2 text-balance font-tech text-[0.72rem] sm:text-[0.85rem] leading-snug text-white backdrop-blur-md [text-shadow:0px_4px_12px_rgba(0,0,0,0.8)] md:px-6 md:py-5 md:text-[1.02rem]"
+                style={{
+                  transform: `translate3d(0, calc(var(--stage-parallax, 0) * 14px), 0)`,
+                  filter: "drop-shadow(0 2px 4px rgba(0,0,0,1))"
+                }}
               >
-                <p>
-                  {highlightKeywords(stage.subHeadline, stage.keywords)}
-                </p>
-              </MatrixTextReveal>
-            </div>
+                <MatrixTextReveal
+                  text={stage.subHeadline}
+                  isActive={activeStage === index}
+                >
+                  <p>
+                    {highlightKeywords(stage.subHeadline, stage.keywords)}
+                  </p>
+                </MatrixTextReveal>
+              </div>
 
-            <div
-              className="mt-4 md:mt-8 flex flex-wrap items-center justify-center gap-2 md:gap-4"
-              style={{
-                transform: `translate3d(0, calc(var(--stage-parallax, 0) * 18px), 0)`,
-              }}
-            >
-              <Link
-                href="/contact"
-                className="btn-primary"
-                onClick={() =>
-                  trackEvent("cta_contact_click", {
-                    source: "hero_stage",
-                    stage: stage.id,
-                  })
-                }
+              <div
+                className="mt-4 md:mt-8 flex flex-wrap items-center justify-center gap-2 md:gap-4"
+                style={{
+                  transform: `translate3d(0, calc(var(--stage-parallax, 0) * 18px), 0)`,
+                }}
               >
-                Contact
-              </Link>
-              <Link
-                href="/book-strategy"
-                className="btn-secondary"
-                onClick={() =>
-                  trackEvent("cta_book_strategy_click", {
-                    source: "hero_stage",
-                    stage: stage.id,
-                  })
-                }
-              >
-                Book Strategy
-              </Link>
-              {stage.primaryCTA.label !== 'Initialize' && (
                 <Link
-                  href={stage.primaryCTA.href}
-                  className="btn-secondary"
+                  href="/contact"
+                  className="btn-primary"
                   onClick={() =>
-                    trackEvent("cta_stage_primary_click", {
+                    trackEvent("cta_contact_click", {
+                      source: "hero_stage",
                       stage: stage.id,
-                      href: stage.primaryCTA.href,
                     })
                   }
                 >
-                  {stage.primaryCTA.label}
+                  Contact
                 </Link>
-              )}
+                <Link
+                  href="/book-strategy"
+                  className="btn-secondary"
+                  onClick={() =>
+                    trackEvent("cta_book_strategy_click", {
+                      source: "hero_stage",
+                      stage: stage.id,
+                    })
+                  }
+                >
+                  Book Strategy
+                </Link>
+                {stage.primaryCTA.label !== 'Initialize' && (
+                  <Link
+                    href={stage.primaryCTA.href}
+                    className="btn-secondary"
+                    onClick={() =>
+                      trackEvent("cta_stage_primary_click", {
+                        stage: stage.id,
+                        href: stage.primaryCTA.href,
+                      })
+                    }
+                  >
+                    {stage.primaryCTA.label}
+                  </Link>
+                )}
+              </div>
+
+              <Link
+                href={stage.subLink.href}
+                target={stage.subLink.href.startsWith("http") ? "_blank" : undefined}
+                rel={stage.subLink.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                onClick={() =>
+                  trackEvent("cta_stage_sub_link_click", {
+                    stage: stage.id,
+                    href: stage.subLink.href,
+                  })
+                }
+                className="mt-4 font-tech text-[0.6rem] uppercase tracking-widest text-[var(--fg-2)] transition-colors hover:text-[var(--fg-1)]"
+              >
+                {stage.subLink.label}
+              </Link>
+
+              <button
+                type="button"
+                onClick={() => setShowGeoSignal((current) => !current)}
+                className="mt-3 rounded-full border border-white/20 bg-black/45 px-4 py-1.5 font-tech text-[0.58rem] uppercase tracking-widest text-white/80 transition hover:border-white/35 hover:text-white"
+              >
+                {showGeoSignal ? "Hide GEO Signal" : "Show GEO Signal"}
+              </button>
+
+              <GeoBlock
+                content={stage.directAnswer}
+                isVisible={activeStage === index && showGeoSignal}
+              />
             </div>
-
-            <Link
-              href={stage.subLink.href}
-              target={stage.subLink.href.startsWith("http") ? "_blank" : undefined}
-              rel={stage.subLink.href.startsWith("http") ? "noopener noreferrer" : undefined}
-              onClick={() =>
-                trackEvent("cta_stage_sub_link_click", {
-                  stage: stage.id,
-                  href: stage.subLink.href,
-                })
-              }
-              className="mt-4 font-tech text-[0.6rem] uppercase tracking-widest text-[var(--fg-2)] transition-colors hover:text-[var(--fg-1)]"
-            >
-              {stage.subLink.label}
-            </Link>
-
-            <button
-              type="button"
-              onClick={() => setShowGeoSignal((current) => !current)}
-              className="mt-3 rounded-full border border-white/20 bg-black/45 px-4 py-1.5 font-tech text-[0.58rem] uppercase tracking-widest text-white/80 transition hover:border-white/35 hover:text-white"
-            >
-              {showGeoSignal ? "Hide GEO Signal" : "Show GEO Signal"}
-            </button>
-
-            <GeoBlock
-              content={stage.directAnswer}
-              isVisible={activeStage === index && showGeoSignal}
-            />
           </article>
         ))}
       </div>

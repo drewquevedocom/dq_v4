@@ -14,7 +14,7 @@ export default function SectionTitle({
     title,
     pulseWord,
     className = "",
-    titleClassName = "text-[clamp(1.9rem,5vw,4.8rem)]",
+    titleClassName = "text-[clamp(2.6rem,6.8vw,6.5rem)]",
 }: SectionTitleProps) {
     return (
         <div className={`w-full ${className}`}>

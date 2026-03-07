@@ -55,7 +55,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
         <div className="relative min-h-screen bg-black text-white selection:bg-[var(--accent-magenta)] selection:text-white">
             <Header />
 
-            <main className="relative z-10 pt-32 md:pt-40 pb-32">
+            <main className="relative z-10 pt-40 md:pt-52 pb-32">
                 <article className="mx-auto max-w-4xl px-4 md:px-8">
 
                     <Link

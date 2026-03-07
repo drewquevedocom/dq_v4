@@ -20,7 +20,7 @@ export default function BlogPage() {
       <div className="pointer-events-none fixed inset-0 z-[1] neo-grid opacity-50" />
       <Header />
 
-      <main className="relative z-10 mx-auto max-w-5xl px-4 pb-32 pt-32 md:px-8 md:pt-40">
+      <main className="relative z-10 mx-auto max-w-5xl px-4 pb-32 pt-40 md:px-8 md:pt-52">
         <Link
           href="/#home"
           className="mb-8 inline-flex items-center gap-2 font-tech text-[0.66rem] uppercase tracking-[0.18em] text-[var(--fg-2)] transition hover:text-white"

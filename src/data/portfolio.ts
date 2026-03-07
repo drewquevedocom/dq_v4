@@ -511,6 +511,7 @@ No, the Next.js interface features over 50+ pre-engineered, expert-level style p
     image: "https://img.youtube.com/vi/xSOv0Nafzr4/maxresdefault.jpg",
     externalUrl: "https://www.youtube.com/watch?v=xSOv0Nafzr4",
     accentColor: "rgba(255, 107, 0, 1)",
+    featured: true,
     seoSchema: `
       {
         "@context": "https://schema.org",
@@ -598,6 +599,7 @@ By embedding strict VideoObject Schema inside the page structure and hosting the
     image: "/assets/portfolio/Jarvis-n8n-08-03-2025_11_13_PM.png",
     externalUrl: "https://www.youtube.com/watch?v=KUvSzvFeZls",
     accentColor: "rgba(234, 56, 76, 1)",
+    featured: true,
     seoSchema: `
       {
         "@context": "https://schema.org",

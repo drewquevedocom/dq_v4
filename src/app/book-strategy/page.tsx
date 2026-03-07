@@ -12,7 +12,7 @@ export default function BookStrategyPage() {
       <NoiseLayer />
       <Header />
 
-      <main className="relative z-10 mx-auto max-w-3xl px-4 pb-32 pt-32 md:pt-40 text-center">
+      <main className="relative z-10 mx-auto max-w-3xl px-4 pb-32 pt-40 md:pt-52 text-center">
         <Link href="/#home" className="mb-8 inline-flex items-center gap-2 font-tech text-[0.66rem] uppercase tracking-[0.18em] text-[var(--fg-2)] transition hover:text-white">
           <ArrowLeft size={14} /> Back
         </Link>

@@ -4,6 +4,7 @@ import Link from "next/link";
 import Header from "@/components/ui/Header";
 import CircularScroll from "@/components/ui/CircularScroll";
 import SocialLinks from "@/components/ui/SocialLinks";
+import BackToTop from "@/components/ui/BackToTop";
 import NoiseLayer from "@/components/ui/NoiseLayer";
 import ScrollSequence from "@/components/hero/ScrollSequence";
 import Capabilities from "@/components/ui/Capabilities";
@@ -79,6 +80,7 @@ export default function Home() {
 
       <SocialLinks />
       <CircularScroll />
+      <BackToTop />
     </div>
   );
 }
