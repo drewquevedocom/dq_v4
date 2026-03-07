@@ -465,12 +465,12 @@ function VideoSlide() {
 
 function JokeSlide({ joke }: { joke: { setup: string; punchline: string } }) {
   return (
-    <div className="flex h-full flex-col items-center justify-center gap-4 px-4 text-center">
+    <div className="flex h-full flex-col items-center justify-center gap-4 px-6 text-center">
       <motion.div
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.4 }}
-        className="text-4xl"
+        className="text-3xl"
       >
         \uD83D\uDE02
       </motion.div>
@@ -478,16 +478,15 @@ function JokeSlide({ joke }: { joke: { setup: string; punchline: string } }) {
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3, duration: 0.5 }}
-        className="max-w-xs font-display text-[4.5vw] leading-[1.2] tracking-tight"
+        className="w-full font-display text-[4vw] leading-[1.2] tracking-tight"
       >
         {joke.setup}
       </motion.p>
-      {/* Punchline delayed reveal */}
       <motion.p
         initial={{ opacity: 0, scale: 0.7, y: 10 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         transition={{ delay: 3, duration: 0.5, type: "spring", stiffness: 200 }}
-        className="max-w-xs font-display text-[5vw] leading-[1.1] text-[#FDB813]"
+        className="w-full font-display text-[5vw] leading-[1.1] text-[#FDB813]"
         style={{ textShadow: "0 0 30px rgba(253, 184, 19, 0.4)" }}
       >
         {joke.punchline}
@@ -496,7 +495,7 @@ function JokeSlide({ joke }: { joke: { setup: string; punchline: string } }) {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 4, duration: 0.5 }}
-        className="font-tech text-[0.5rem] uppercase tracking-[0.18em] text-[var(--fg-2)]"
+        className="w-full font-tech text-[0.5rem] uppercase tracking-[0.18em] text-[var(--fg-2)]"
       >
         Your driver is also a comedian (apparently)
       </motion.div>
@@ -506,11 +505,11 @@ function JokeSlide({ joke }: { joke: { setup: string; punchline: string } }) {
 
 function ConnectSlide() {
   return (
-    <div className="flex h-full flex-col items-center justify-center gap-3 px-4 text-center">
+    <div className="flex h-full flex-col items-center justify-center gap-3 px-6 text-center">
       <motion.div custom={0} variants={stagger} initial="hidden" animate="show">
         <span className="neo-chip text-[0.55rem]">Connect</span>
       </motion.div>
-      <motion.h2 custom={1} variants={stagger} initial="hidden" animate="show" className="font-display text-[5.5vw] uppercase leading-[0.9]">
+      <motion.h2 custom={1} variants={stagger} initial="hidden" animate="show" className="w-full font-display text-[5.5vw] uppercase leading-[0.9]">
         <GradientText>Let&apos;s Build Something</GradientText>
       </motion.h2>
       <motion.div custom={2} variants={stagger} initial="hidden" animate="show">
@@ -531,7 +530,7 @@ function ConnectSlide() {
 
 function AdHereSlide() {
   return (
-    <div className="flex h-full flex-col items-center justify-center gap-4 px-4 text-center">
+    <div className="flex h-full flex-col items-center justify-center gap-4 px-6 text-center">
       <motion.div custom={0} variants={stagger} initial="hidden" animate="show" className="text-4xl">
         \uD83D\uDCFA
       </motion.div>
@@ -540,7 +539,7 @@ function AdHereSlide() {
         variants={stagger}
         initial="hidden"
         animate="show"
-        className="font-display text-[7vw] uppercase leading-[0.9]"
+        className="w-full font-display text-[7vw] uppercase leading-[0.9]"
         style={{
           animation: "neonFlicker 2s ease-in-out infinite",
           textShadow: "0 0 20px rgba(0, 212, 255, 0.5), 0 0 40px rgba(0, 212, 255, 0.2)",
@@ -548,7 +547,7 @@ function AdHereSlide() {
       >
         Your Ad Here
       </motion.h2>
-      <motion.p custom={2} variants={stagger} initial="hidden" animate="show" className="max-w-xs font-body text-sm text-[var(--fg-1)]">
+      <motion.p custom={2} variants={stagger} initial="hidden" animate="show" className="w-full font-body text-sm text-[var(--fg-1)]">
         This screen could feature <span className="font-semibold text-white">YOUR</span> business.
       </motion.p>
       <motion.p custom={3} variants={stagger} initial="hidden" animate="show" className="font-tech text-[0.55rem] uppercase tracking-[0.18em] text-[var(--fg-2)]">
@@ -560,11 +559,11 @@ function AdHereSlide() {
 
 function TipsSlide() {
   return (
-    <div className="flex h-full flex-col items-center justify-center gap-4 px-4 text-center">
+    <div className="flex h-full flex-col items-center justify-center gap-4 px-6 text-center">
       <motion.div custom={0} variants={stagger} initial="hidden" animate="show" className="text-4xl">
         \uD83D\uDE4F
       </motion.div>
-      <motion.h2 custom={1} variants={stagger} initial="hidden" animate="show" className="font-display text-[6vw] uppercase leading-[0.9]">
+      <motion.h2 custom={1} variants={stagger} initial="hidden" animate="show" className="w-full font-display text-[6vw] uppercase leading-[0.9]">
         Tips Are Greatly
         <br />
         <span
@@ -579,7 +578,7 @@ function TipsSlide() {
           Appreciated
         </span>
       </motion.h2>
-      <motion.p custom={2} variants={stagger} initial="hidden" animate="show" className="max-w-xs font-body text-xs text-[var(--fg-2)]">
+      <motion.p custom={2} variants={stagger} initial="hidden" animate="show" className="w-full font-body text-xs text-[var(--fg-2)]">
         Your generosity keeps this ride experience premium. Thank you!
       </motion.p>
     </div>
