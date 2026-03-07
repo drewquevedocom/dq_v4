@@ -244,29 +244,29 @@ function CountStat({ value, prefix, suffix, label, delay }: { value: number; pre
 
 function WelcomeSlide() {
   return (
-    <div className="flex h-full flex-col items-center justify-center gap-4 px-4 text-center">
+    <div className="flex h-full flex-col items-center justify-center gap-4 px-6 text-center">
       <motion.div custom={0} variants={stagger} initial="hidden" animate="show">
-        <Image src="/assets/web_logo.png" alt="Drew Quevedo" width={200} height={50} className="mx-auto" priority />
+        <Image src="/assets/web_logo.png" alt="Drew Quevedo" width={220} height={55} className="mx-auto" priority />
       </motion.div>
       <motion.h1
         custom={1}
         variants={stagger}
         initial="hidden"
         animate="show"
-        className="font-display text-[7vw] uppercase leading-[0.9] tracking-tight"
+        className="w-full font-display text-[7vw] uppercase leading-[0.9] tracking-tight"
       >
-        Welcome to
+        Welcome
         <br />
-        <GradientText className="font-display text-[8vw] uppercase leading-[0.9]">Your Ride</GradientText>
+        <GradientText className="font-display text-[9vw] uppercase leading-[0.9]">Uber / Lyft Riders</GradientText>
       </motion.h1>
       <motion.p
         custom={2}
         variants={stagger}
         initial="hidden"
         animate="show"
-        className="font-body text-sm text-[var(--fg-1)]"
+        className="w-full font-body text-sm text-[var(--fg-1)]"
       >
-        Sit back, relax, and enjoy the experience.
+        Sit back, relax, and enjoy the ride.
       </motion.p>
     </div>
   );
@@ -274,19 +274,19 @@ function WelcomeSlide() {
 
 function BrandSlide() {
   return (
-    <div className="flex h-full flex-col items-center justify-center gap-4 px-4 text-center">
+    <div className="flex h-full flex-col items-center justify-center gap-3 px-6 text-center">
       <motion.div custom={0} variants={stagger} initial="hidden" animate="show" className="shrink-0">
-        <div className="relative mx-auto h-28 w-28 overflow-hidden rounded-2xl border border-[var(--line)]">
+        <div className="relative mx-auto h-32 w-32 overflow-hidden rounded-2xl border border-[var(--line)]">
           <Image src="/assets/portfolio/drew_tux.png" alt="Drew Quevedo" fill className="object-cover" />
         </div>
       </motion.div>
       <motion.div custom={1} variants={stagger} initial="hidden" animate="show">
-        <Image src="/assets/web_logo.png" alt="Drew Quevedo" width={180} height={45} className="mx-auto" />
+        <Image src="/assets/web_logo.png" alt="Drew Quevedo" width={200} height={50} className="mx-auto" />
       </motion.div>
-      <motion.p custom={2} variants={stagger} initial="hidden" animate="show" className="font-tech text-[0.6rem] uppercase tracking-[0.18em] text-[var(--accent-magenta)]">
+      <motion.p custom={2} variants={stagger} initial="hidden" animate="show" className="w-full font-tech text-[0.65rem] uppercase tracking-[0.16em] text-[var(--accent-magenta)]">
         AI Strategist &middot; Engineer &middot; Creator &middot; Family Man
       </motion.p>
-      <motion.p custom={3} variants={stagger} initial="hidden" animate="show" className="max-w-xs font-body text-xs leading-relaxed text-[var(--fg-2)]">
+      <motion.p custom={3} variants={stagger} initial="hidden" animate="show" className="w-full font-body text-xs leading-relaxed text-[var(--fg-2)]">
         Building high-performance autonomous brand ecosystems powered by Agentic AI, GEO strategy, and cinematic design.
       </motion.p>
     </div>
@@ -301,14 +301,14 @@ function ServicesSlide() {
     { icon: "\uD83C\uDFA8", label: "Creative", desc: "AI Content" },
   ];
   return (
-    <div className="flex h-full flex-col items-center justify-center gap-4 px-4 text-center">
+    <div className="flex h-full flex-col items-center justify-center gap-4 px-6 text-center">
       <motion.div custom={0} variants={stagger} initial="hidden" animate="show">
         <span className="neo-chip text-[0.55rem]">What I Do</span>
       </motion.div>
-      <motion.h2 custom={1} variants={stagger} initial="hidden" animate="show" className="font-display text-[6vw] uppercase leading-[0.9]">
+      <motion.h2 custom={1} variants={stagger} initial="hidden" animate="show" className="w-full font-display text-[6vw] uppercase leading-[0.9]">
         <GradientText>I Build the Future</GradientText>
       </motion.h2>
-      <div className="grid grid-cols-2 gap-2">
+      <div className="grid w-full grid-cols-2 gap-2">
         {pillars.map((p, i) => (
           <motion.div
             key={p.label}
@@ -319,7 +319,7 @@ function ServicesSlide() {
             className="neo-card flex flex-col items-center gap-1.5 p-3"
           >
             <span className="text-xl">{p.icon}</span>
-            <span className="font-display text-[0.65rem] uppercase tracking-wide text-[var(--fg-0)]">{p.label}</span>
+            <span className="font-display text-[0.7rem] uppercase tracking-wide text-[var(--fg-0)]">{p.label}</span>
             <span className="font-body text-[0.55rem] text-[var(--fg-2)]">{p.desc}</span>
           </motion.div>
         ))}
@@ -330,16 +330,16 @@ function ServicesSlide() {
 
 function FunFactSlide({ fact }: { fact: string }) {
   return (
-    <div className="flex h-full flex-col items-center justify-center gap-4 px-4 text-center">
-      <motion.div custom={0} variants={stagger} initial="hidden" animate="show">
-        <span className="neo-chip border-[rgba(253,184,19,0.5)] text-[#FDB813] text-[0.55rem]">Fun Fact</span>
-      </motion.div>
-      <div className="max-w-xs font-display text-[4.2vw] leading-[1.2] tracking-tight">
-        <Typewriter text={fact} />
-      </div>
-      <motion.div custom={2} variants={stagger} initial="hidden" animate="show" className="text-2xl">
+    <div className="flex h-full flex-col items-center justify-center gap-3 px-6 text-center">
+      <motion.div custom={0} variants={stagger} initial="hidden" animate="show" className="text-2xl">
         \uD83E\uDDD0
       </motion.div>
+      <motion.div custom={1} variants={stagger} initial="hidden" animate="show">
+        <span className="neo-chip border-[rgba(253,184,19,0.5)] text-[#FDB813] text-[0.55rem]">Fun Fact</span>
+      </motion.div>
+      <div className="w-full font-body text-[3.2vw] leading-[1.4]">
+        <Typewriter text={fact} />
+      </div>
     </div>
   );
 }
@@ -380,20 +380,20 @@ function CaseStudySlide({ id }: { id: string }) {
   if (!study) return null;
 
   return (
-    <div className="flex h-full flex-col items-center justify-center gap-3 px-4 text-center">
+    <div className="flex h-full flex-col items-center justify-center gap-3 px-6 text-center">
       <motion.div custom={0} variants={stagger} initial="hidden" animate="show">
         <span className="neo-chip text-[0.55rem]">Case Study</span>
       </motion.div>
-      <motion.div custom={1} variants={stagger} initial="hidden" animate="show" className={`relative h-10 w-32 ${study.logoBg || ""} rounded-lg`}>
+      <motion.div custom={1} variants={stagger} initial="hidden" animate="show" className={`relative h-12 w-40 ${study.logoBg || ""} rounded-lg`}>
         <Image src={study.logo} alt={study.name} fill className="object-contain p-1" />
       </motion.div>
-      <motion.h2 custom={2} variants={stagger} initial="hidden" animate="show" className="font-display text-[5vw] uppercase leading-[0.9]">
+      <motion.h2 custom={2} variants={stagger} initial="hidden" animate="show" className="w-full font-display text-[5vw] uppercase leading-[0.9]">
         {study.name}
       </motion.h2>
-      <motion.p custom={3} variants={stagger} initial="hidden" animate="show" className="font-tech text-[0.55rem] uppercase tracking-[0.12em] text-[var(--accent-green)]">
+      <motion.p custom={3} variants={stagger} initial="hidden" animate="show" className="w-full font-tech text-[0.6rem] uppercase tracking-[0.12em] text-[var(--accent-green)]">
         {study.tagline}
       </motion.p>
-      <div className="grid grid-cols-2 gap-2">
+      <div className="grid w-full grid-cols-2 gap-2">
         {study.metrics.map((m, i) => (
           <CountStat
             key={m.label}
@@ -411,11 +411,11 @@ function CaseStudySlide({ id }: { id: string }) {
 
 function CreativeSlide() {
   return (
-    <div className="flex h-full flex-col items-center justify-center gap-3 px-4 text-center">
+    <div className="flex h-full flex-col items-center justify-center gap-3 px-6 text-center">
       <motion.div custom={0} variants={stagger} initial="hidden" animate="show">
         <span className="neo-chip border-[rgba(168,85,247,0.5)] text-[var(--accent-magenta)] text-[0.55rem]">Creative AI</span>
       </motion.div>
-      <motion.div custom={1} variants={stagger} initial="hidden" animate="show" className="relative mx-auto h-32 w-56 overflow-hidden rounded-xl border border-[var(--line)]">
+      <motion.div custom={1} variants={stagger} initial="hidden" animate="show" className="relative w-full overflow-hidden rounded-xl border border-[var(--line)]" style={{ aspectRatio: "16/9" }}>
         <Image src="/assets/portfolio/geo_is_ner_seo_image.jpg" alt="GEO Music Video" fill className="object-cover" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
         <div className="absolute bottom-2 left-3 right-3 text-left">
@@ -423,10 +423,10 @@ function CreativeSlide() {
           <div className="font-tech text-[0.5rem] text-[var(--fg-2)]">4K Cinematic AI Music Video</div>
         </div>
       </motion.div>
-      <motion.h2 custom={2} variants={stagger} initial="hidden" animate="show" className="font-display text-[5vw] uppercase leading-[0.9]">
-        Produced in <span className="text-[var(--accent-magenta)]">1.5 Hours</span>
+      <motion.h2 custom={2} variants={stagger} initial="hidden" animate="show" className="w-full font-display text-[5vw] uppercase leading-[0.9]">
+        Produced in <span className="text-[var(--accent-magenta)]">1.5 Hours</span> with AI
       </motion.h2>
-      <motion.p custom={3} variants={stagger} initial="hidden" animate="show" className="max-w-xs font-body text-[0.65rem] text-[var(--fg-2)]">
+      <motion.p custom={3} variants={stagger} initial="hidden" animate="show" className="w-full font-body text-[0.65rem] text-[var(--fg-2)]">
         At 5% of traditional cost using OpenArt.ai, Suno, ChatGPT &amp; Whisk
       </motion.p>
     </div>
@@ -435,8 +435,8 @@ function CreativeSlide() {
 
 function VideoSlide() {
   return (
-    <div className="flex h-full flex-col items-center justify-center gap-2 px-2 text-center">
-      <motion.div custom={0} variants={stagger} initial="hidden" animate="show" className="font-display text-[3.5vw] uppercase tracking-wide text-[var(--fg-1)]">
+    <div className="flex h-full flex-col items-center justify-center gap-2 px-4 text-center">
+      <motion.div custom={0} variants={stagger} initial="hidden" animate="show" className="w-full font-display text-[3vw] uppercase tracking-wide text-[var(--fg-1)]">
         Now Playing &mdash; GEO is the New SEO
       </motion.div>
       <motion.div
@@ -444,7 +444,7 @@ function VideoSlide() {
         variants={stagger}
         initial="hidden"
         animate="show"
-        className="relative w-full max-w-md overflow-hidden rounded-xl border border-[var(--line)]"
+        className="relative w-full overflow-hidden rounded-xl border border-[var(--line)]"
         style={{ aspectRatio: "16/9" }}
       >
         <iframe
@@ -588,20 +588,11 @@ function TipsSlide() {
 
 function RateSlide() {
   return (
-    <div className="flex h-full flex-col items-center justify-center gap-3 px-4 text-center">
-      <motion.div custom={0} variants={stagger} initial="hidden" animate="show" className="flex gap-1.5 text-2xl">
-        {[...Array(5)].map((_, i) => (
-          <motion.span
-            key={i}
-            initial={{ opacity: 0, scale: 0, rotate: -180 }}
-            animate={{ opacity: 1, scale: 1, rotate: 0 }}
-            transition={{ delay: 0.3 + i * 0.12, type: "spring", stiffness: 300 }}
-          >
-            \u2B50
-          </motion.span>
-        ))}
+    <div className="flex h-full flex-col items-center justify-center gap-4 px-6 text-center">
+      <motion.div custom={0} variants={stagger} initial="hidden" animate="show">
+        <span className="neo-chip text-[0.55rem]">Uber / Lyft Riders</span>
       </motion.div>
-      <div className="font-display text-[6vw] uppercase leading-[0.9]">
+      <div className="w-full font-display text-[6vw] uppercase leading-[0.9]">
         <WaveText text="Thanks for Riding!" />
       </div>
       <motion.p
@@ -609,12 +600,12 @@ function RateSlide() {
         variants={stagger}
         initial="hidden"
         animate="show"
-        className="max-w-xs font-body text-xs text-[var(--fg-1)]"
+        className="w-full font-body text-sm text-[var(--fg-1)]"
       >
         If you enjoyed the experience, a 5-star rating means the world. Have an amazing day!
       </motion.p>
       <motion.div custom={3} variants={stagger} initial="hidden" animate="show">
-        <Image src="/assets/web_logo.png" alt="Drew Quevedo" width={120} height={30} className="mx-auto opacity-40" />
+        <Image src="/assets/web_logo.png" alt="Drew Quevedo" width={140} height={35} className="mx-auto opacity-40" />
       </motion.div>
     </div>
   );

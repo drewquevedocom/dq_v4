@@ -14,7 +14,6 @@ import SectionTitle from "@/components/ui/SectionTitle";
 import SectionSubtitle from "@/components/ui/SectionSubtitle";
 import RecentInsights from "@/components/ui/RecentInsights";
 import { trackEvent } from "@/lib/analytics";
-import { Globe, Instagram, Linkedin, Youtube } from "lucide-react";
 
 export default function Home() {
   return (
