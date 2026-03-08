@@ -13,6 +13,7 @@ import TelemetryBeacon from "@/components/TelemetryBeacon";
 import SectionTitle from "@/components/ui/SectionTitle";
 import SectionSubtitle from "@/components/ui/SectionSubtitle";
 import RecentInsights from "@/components/ui/RecentInsights";
+import Services from "@/components/ui/Services";
 import { trackEvent } from "@/lib/analytics";
 
 export default function Home() {
@@ -28,6 +29,8 @@ export default function Home() {
       </section>
 
       <Capabilities />
+
+      <Services />
 
       <PortfolioTeaser />
 

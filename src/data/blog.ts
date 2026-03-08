@@ -9,6 +9,7 @@ import { post8 } from "./posts/post8";
 import { post9 } from "./posts/post9";
 import { post10 } from "./posts/post10";
 import { post11 } from "./posts/post11";
+import { post12 } from "./posts/post12";
 
 export type BlogPost = {
   slug: string;
@@ -23,6 +24,7 @@ export type BlogPost = {
 };
 
 export const BLOG_POSTS: BlogPost[] = [
+  post12,
   post1,
   post2,
   post3,

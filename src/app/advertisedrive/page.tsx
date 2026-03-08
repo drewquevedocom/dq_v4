@@ -22,10 +22,10 @@ const FUN_FACTS = [
    House Rules
    ───────────────────────────────────────────── */
 const HOUSE_RULES = [
-  { icon: "🚭", rule: "No Smoking or Vaping" },
-  { icon: "🍔", rule: "No Eating (Drinks OK)" },
-  { icon: "🔊", rule: "Keep Volume Respectful" },
-  { icon: "🙏", rule: "Respect the Vehicle" },
+  { icon: "🚭", rule: "No Smoking — Unless You Brought Enough for Everyone" },
+  { icon: "🍔", rule: "No Eating — This Isn't a Food Truck (Drinks OK)" },
+  { icon: "🔊", rule: "Volume Down — My Ears Have Feelings Too" },
+  { icon: "🙏", rule: "Treat the Ride Like Your Mom's Car" },
 ];
 
 /* ─────────────────────────────────────────────
@@ -113,12 +113,12 @@ function useCountUp(target: number, duration: number = 1500, delay: number = 400
 }
 
 /* ─── Background with image ─── */
-function SlideBg({ src, gradient = "linear-gradient(to top, var(--bg-0) 0%, rgba(5,6,10,0.85) 50%, rgba(5,6,10,0.4) 100%)" }: { src?: string; gradient?: string }) {
+function SlideBg({ src, gradient = "linear-gradient(to top, var(--bg-0) 0%, rgba(5,6,10,0.7) 50%, rgba(5,6,10,0.3) 100%)" }: { src?: string; gradient?: string }) {
   if (!src) return null;
   return (
     <>
       <div className="absolute inset-0 z-[-1] overflow-hidden">
-        <Image src={src} alt="Background" fill className="object-cover opacity-[0.15]" priority />
+        <Image src={src} alt="Background" fill className="object-cover opacity-[0.4]" priority />
       </div>
       <div className="absolute inset-0 z-[-1]" style={{ background: gradient }} />
     </>
@@ -332,13 +332,15 @@ function CaseStudySlide({ id }: { id: string }) {
     name: string;
     logo: string;
     logoBg?: string;
+    bg?: string;
     metrics: { value: number; prefix?: string; suffix?: string; label: string }[];
     tagline: string;
   }> = {
     econstruct: {
       name: "eConstruct Inc",
-      logo: "/assets/portfolio/econstruct_logo.png",
+      logo: "/assets/New-House-Construction-Contractor-ADUs-Builder-Tiny-Homes-in-Los-Angeles-03-01-2026_09_53_PM.png",
       logoBg: "bg-white/10",
+      bg: "/assets/drew_super_laker_dad.png",
       metrics: [
         { value: 4.2, suffix: "x", label: "GEO Citations", prefix: "" },
         { value: 310, suffix: "%", label: "Organic Traffic", prefix: "+" },
@@ -364,11 +366,11 @@ function CaseStudySlide({ id }: { id: string }) {
 
   return (
     <div className="flex h-full flex-col items-center justify-center gap-6 px-12 text-center w-full">
-      <SlideBg src="/assets/portfolio/geo_is_ner_seo_image.jpg" />
+      <SlideBg src={study.bg || "/assets/portfolio/geo_is_ner_seo_image.jpg"} />
       <motion.div custom={0} variants={stagger} initial="hidden" animate="show">
         <span className="neo-chip text-lg lg:text-xl px-6 py-2">Case Study</span>
       </motion.div>
-      <motion.div custom={1} variants={stagger} initial="hidden" animate="show" className={`relative h-24 w-72 ${study.logoBg || ""} rounded-xl p-2`}>
+      <motion.div custom={1} variants={stagger} initial="hidden" animate="show" className={`relative h-32 w-72 ${study.logoBg || ""} rounded-xl p-2`}>
         <Image src={study.logo} alt={study.name} fill className="object-contain p-2" />
       </motion.div>
       <motion.h2 custom={2} variants={stagger} initial="hidden" animate="show" className="w-full font-display text-5xl lg:text-7xl uppercase leading-[0.9]">
