@@ -1,56 +1,47 @@
 "use client";
 
 import { useState, useEffect, useCallback, useRef } from "react";
+import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
 
 /* ─────────────────────────────────────────────
-   Fun Facts — each paired with a background image
+   Fun Facts (randomly picked each loop)
    ───────────────────────────────────────────── */
 const FUN_FACTS = [
-  { text: "Did you know? Your driver built a website for the Vatican & Pope John Paul II in 2001 — commissioned by a Vatican attorney.", bgImage: "/assets/portfolio/drew_vatican_2001.jpg" },
-  { text: "Did you know? Your driver built AI systems that automate 60+ hours of work per month for medical companies.", bgImage: "/assets/portfolio/Whisk_a0ef32009d0bdc6b50548b2187d24e60dr.jpeg" },
-  { text: "Did you know? Your driver produced a 4K music video in 1.5 hours using AI — at 5% of traditional cost.", bgImage: "/assets/portfolio/geo_is_ner_seo_image.jpg" },
-  { text: "Did you know? Your driver helped a construction company rank #1 in AI search results.", bgImage: "/assets/drew_uber_driver.png" },
-  { text: "Did you know? Your driver is a family man who builds AI systems by day and drives you safely by night.", bgImage: "/assets/drew_fam_beach.png" },
-  { text: "Did you know? Your driver builds autonomous AI agent swarms that run entire businesses.", bgImage: "/assets/drew_LAB_COAT_2.png" },
-  { text: "Did you know? Your driver has been building websites since 1999 — before Google was even a year old.", bgImage: "/assets/portfolio/Whisk_jdlmthjowy.jpg" },
-  { text: "Did you know? Your driver\u2019s AI agents answer phone calls, book appointments, and close deals 24/7.", bgImage: "/assets/portfolio/Whisk_506428d85300761ae7146898ba6eb687dr.jpeg" },
+  "Did you know? Your driver built a website for the Vatican & Pope John Paul II in 2001 — commissioned by a Vatican attorney.",
+  "Did you know? Your driver built AI systems that automate 60+ hours of work per month for medical companies.",
+  "Did you know? Your driver produced a 4K music video in 1.5 hours using AI — at 5% of traditional cost.",
+  "Did you know? Your driver helped a construction company rank #1 in AI search results.",
+  "Did you know? Your driver is a family man who builds AI systems by day and drives you safely by night.",
+  "Did you know? Your driver builds autonomous AI agent swarms that run entire businesses.",
+  "Did you know? Your driver has been building websites since 1999 — before Google was even a year old.",
+  "Did you know? Your driver’s AI agents answer phone calls, book appointments, and close deals 24/7.",
 ];
 
 /* ─────────────────────────────────────────────
-   Jokes — mix of regular jokes + dad jokes
+   House Rules
+   ───────────────────────────────────────────── */
+const HOUSE_RULES = [
+  { icon: "🚭", rule: "No Smoking or Vaping" },
+  { icon: "🍔", rule: "No Eating (Drinks OK)" },
+  { icon: "🔊", rule: "Keep Volume Respectful" },
+  { icon: "🙏", rule: "Respect the Vehicle" },
+];
+
+/* ─────────────────────────────────────────────
+   Jokes — general audience, actually funny
    ───────────────────────────────────────────── */
 const JOKES = [
   { setup: "I told my wife she was drawing her eyebrows too high.", punchline: "She looked surprised." },
-  { setup: "I\u2019m on a seafood diet.", punchline: "I see food and I eat it." },
-  { setup: "My therapist says I have a preoccupation with vengeance.", punchline: "We\u2019ll see about that." },
+  { setup: "I’m on a seafood diet.", punchline: "I see food and I eat it." },
+  { setup: "My therapist says I have a preoccupation with vengeance.", punchline: "We’ll see about that." },
   { setup: "I used to hate facial hair...", punchline: "but then it grew on me." },
-  { setup: "I asked the gym instructor to teach me the splits. He said \u2018How flexible are you?\u2019", punchline: "I said \u2018I can\u2019t make Tuesdays.\u2019" },
+  { setup: "I asked the gym instructor to teach me the splits. He said ‘How flexible are you?’", punchline: "I said ‘I can’t make Tuesdays.’" },
   { setup: "My wife told me to stop impersonating a flamingo.", punchline: "I had to put my foot down." },
-  { setup: "I told my suitcase we\u2019re not going on vacation.", punchline: "Now I\u2019m dealing with emotional baggage." },
+  { setup: "I told my suitcase we’re not going on vacation.", punchline: "Now I’m dealing with emotional baggage." },
   { setup: "What do you call a fake noodle?", punchline: "An impasta." },
-  { setup: "I have a fear of speed bumps.", punchline: "But I\u2019m slowly getting over it." },
-  { setup: "My doctor told me I\u2019m going deaf.", punchline: "The news was hard for me to hear." },
-  { setup: "Why don\u2019t eggs tell jokes?", punchline: "They\u2019d crack each other up." },
-  { setup: "I\u2019m reading a book about anti-gravity.", punchline: "It\u2019s impossible to put down." },
-  { setup: "What did the ocean say to the beach?", punchline: "Nothing, it just waved." },
-  { setup: "I used to play piano by ear.", punchline: "Now I use my hands." },
-  { setup: "Why did the scarecrow win an award?", punchline: "He was outstanding in his field." },
-  { setup: "I told my daughter she was drawing her eyebrows too low.", punchline: "She looked angry." },
-  { setup: "What do you call a bear with no teeth?", punchline: "A gummy bear." },
-  { setup: "Why do fathers take an extra pair of socks when they go golfing?", punchline: "In case they get a hole in one." },
-  { setup: "I only know 25 letters of the alphabet.", punchline: "I don\u2019t know Y." },
-  { setup: "What did the coffee report to the police?", punchline: "A mugging." },
-];
-
-/* ─────────────────────────────────────────────
-   House Rules — edgy, funny
-   ───────────────────────────────────────────── */
-const HOUSE_RULES = [
-  { icon: "\u2728", rule: "Good vibes only. Bad vibes get dropped at the next corner." },
-  { icon: "\uD83C\uDFB5", rule: "DJ requests welcome. Except Nickelback." },
-  { icon: "\uD83D\uDD0C", rule: "Phone charger in the back. You\u2019re welcome." },
-  { icon: "\u2B50", rule: "Rate 5 stars or this screen plays Baby Shark on loop." },
-  { icon: "\uD83C\uDFC6", rule: "Uber 4.95 \u00B7 Lyft 5.0 \u2014 Help keep the streak alive." },
+  { setup: "I have a fear of speed bumps.", punchline: "But I’m slowly getting over it." },
+  { setup: "My doctor told me I’m going deaf.", punchline: "The news was hard for me to hear." },
 ];
 
 /* ─────────────────────────────────────────────
@@ -63,6 +54,7 @@ type SlideType =
   | "funfact"
   | "casestudy"
   | "creative"
+  | "video"
   | "houserules"
   | "joke"
   | "connect"
@@ -73,7 +65,7 @@ interface Slide {
   id: string;
   type: SlideType;
   accent: string;
-  duration?: number;
+  duration?: number; // custom duration in ms (default 10000)
 }
 
 const SLIDES: Slide[] = [
@@ -84,7 +76,8 @@ const SLIDES: Slide[] = [
   { id: "econstruct", type: "casestudy", accent: "rgba(0, 212, 255, 0.14)" },
   { id: "laso", type: "casestudy", accent: "rgba(25, 245, 169, 0.12)" },
   { id: "creative", type: "creative", accent: "rgba(168, 85, 247, 0.16)" },
-  { id: "houserules", type: "houserules", accent: "rgba(253, 184, 19, 0.14)" },
+  { id: "houserules", type: "houserules", accent: "rgba(253, 184, 19, 0.14)", duration: 12000 },
+  { id: "video", type: "video", accent: "rgba(122, 67, 230, 0.10)", duration: 30000 },
   { id: "joke", type: "joke", accent: "rgba(253, 184, 19, 0.12)" },
   { id: "connect", type: "connect", accent: "rgba(122, 67, 230, 0.14)" },
   { id: "tips", type: "tips", accent: "rgba(25, 245, 169, 0.14)" },
@@ -98,8 +91,58 @@ function pickRandom<T>(arr: T[]): T {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
-/* ─── Typewriter (pure JS) ─── */
-function Typewriter({ text }: { text: string }) {
+/* ─── Animated counter hook ─── */
+function useCountUp(target: number, duration: number = 1500, delay: number = 400) {
+  const [value, setValue] = useState(0);
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      const start = performance.now();
+      const tick = (now: number) => {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        // ease-out cubic
+        const eased = 1 - Math.pow(1 - progress, 3);
+        setValue(Math.round(target * eased));
+        if (progress < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    }, delay);
+    return () => clearTimeout(timeout);
+  }, [target, duration, delay]);
+  return value;
+}
+
+/* ─── Background with image ─── */
+function SlideBg({ src, gradient = "linear-gradient(to top, var(--bg-0) 0%, rgba(5,6,10,0.85) 50%, rgba(5,6,10,0.4) 100%)" }: { src?: string; gradient?: string }) {
+  if (!src) return null;
+  return (
+    <>
+      <div className="absolute inset-0 z-[-1] overflow-hidden">
+        <Image src={src} alt="Background" fill className="object-cover opacity-[0.15]" priority />
+      </div>
+      <div className="absolute inset-0 z-[-1]" style={{ background: gradient }} />
+    </>
+  );
+}
+
+/* ─── Transition variants ─── */
+const slideVariants = {
+  enter: { opacity: 0, scale: 1.04 },
+  center: { opacity: 1, scale: 1 },
+  exit: { opacity: 0, scale: 0.96 },
+};
+
+const stagger = {
+  hidden: { opacity: 0, y: 16 },
+  show: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { delay: 0.1 + i * 0.08, duration: 0.45, ease: "easeOut" as const },
+  }),
+};
+
+/* ─── Typewriter component ─── */
+function Typewriter({ text, className }: { text: string; className?: string }) {
   const [displayed, setDisplayed] = useState("");
   useEffect(() => {
     setDisplayed("");
@@ -112,159 +155,173 @@ function Typewriter({ text }: { text: string }) {
     return () => clearInterval(iv);
   }, [text]);
   return (
-    <span>
+    <span className={className}>
       {displayed}
-      <span style={{ animation: "pulse 1s infinite", color: "var(--accent-magenta)" }}>|</span>
+      <span className="animate-pulse text-[var(--accent-magenta)]">|</span>
     </span>
   );
 }
 
-/* ─── Background image with gradient overlay (plain img) ─── */
-function SlideBg({ src, gradient }: { src: string; gradient?: string }) {
+/* ─── Gradient sweep text ─── */
+function GradientText({ children, className }: { children: React.ReactNode; className?: string }) {
   return (
-    <>
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={src}
-        alt=""
-        style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
-        onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
-      />
-      <div
-        style={{
-          position: "absolute", inset: 0,
-          background: gradient || "linear-gradient(to top, #05060a 0%, rgba(5,6,10,0.75) 40%, rgba(5,6,10,0.35) 100%)",
-        }}
-      />
-    </>
+    <span
+      className={className}
+      style={{
+        background: "linear-gradient(90deg, #7a43e6, #bb8dff, #00D4FF, #7a43e6)",
+        backgroundSize: "200% 100%",
+        WebkitBackgroundClip: "text",
+        WebkitTextFillColor: "transparent",
+        animation: "gradientSweep 3s linear infinite",
+      }}
+    >
+      {children}
+    </span>
   );
 }
 
-/* ─── Counter stat (static) ─── */
-function CountStat({ value, prefix, suffix, label }: { value: number; prefix?: string; suffix?: string; label: string }) {
+/* ─── Wave text (letter by letter) ─── */
+function WaveText({ text, className }: { text: string; className?: string }) {
   return (
-    <div className="neo-card" style={{ padding: "2vw", backdropFilter: "blur(4px)", background: "rgba(5,6,10,0.6)" }}>
-      <div className="font-tech" style={{ fontSize: "3vw", fontWeight: 700, color: "var(--accent-cyan)" }}>
-        {prefix}{Number.isInteger(value) ? value : value.toFixed(1)}{suffix}
-      </div>
-      <div className="font-body" style={{ marginTop: 2, fontSize: "2.5vw", color: "var(--fg-2)" }}>{label}</div>
-    </div>
+    <span className={className}>
+      {text.split("").map((char, i) => (
+        <motion.span
+          key={i}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{
+            delay: 0.3 + i * 0.04,
+            type: "spring",
+            stiffness: 200,
+            damping: 12,
+          }}
+          style={{ display: "inline-block" }}
+        >
+          {char === " " ? "\u00A0" : char}
+        </motion.span>
+      ))}
+    </span>
   );
 }
 
-/* ─── Rating badge (static) ─── */
-function RatingBadge({ platform, rating }: { platform: string; rating: number }) {
+/* ─── Counter stat ─── */
+function CountStat({ value, prefix, suffix, label, delay }: { value: number; prefix?: string; suffix?: string; label: string; delay: number }) {
+  const count = useCountUp(value, 1200, delay);
   return (
-    <div className="neo-card" style={{ padding: "2vw 3vw", backdropFilter: "blur(4px)", background: "rgba(5,6,10,0.5)" }}>
-      <div className="font-tech" style={{ fontSize: "2.5vw", textTransform: "uppercase", letterSpacing: "0.12em", color: "var(--fg-2)" }}>{platform}</div>
-      <div className="font-display" style={{ fontSize: "3vw", fontWeight: 700, color: "#FDB813" }}>
-        {rating.toFixed(platform === "Lyft" ? 1 : 2)}
+    <div className="neo-card px-4 py-3">
+      <div className="font-tech text-3xl font-bold text-[var(--accent-cyan)]">
+        {prefix}{count}{suffix}
       </div>
+      <div className="mt-1 font-body text-sm uppercase tracking-wide text-[var(--fg-2)]">{label}</div>
     </div>
   );
 }
 
 /* ═══════════════════════════════════════════════
-   SLIDE RENDERERS
+   SLIDE RENDERERS — 1080p Toyota Sienna display
    ═══════════════════════════════════════════════ */
 
 function WelcomeSlide() {
   return (
-    <div style={{ position: "relative", height: "100%", width: "100%" }}>
+    <div className="flex h-full flex-col items-center justify-center gap-6 px-12 text-center w-full">
       <SlideBg src="/assets/drew_driver_sienna.png" />
-      <div className="slide-content">
-        <div className="stagger-1">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/assets/web_logo.png" alt="Drew Quevedo" style={{ margin: "0 auto", width: "90vw", height: "auto" }} />
-        </div>
-        <h1 className="stagger-2 font-display" style={{ width: "100%", fontSize: "3vw", textTransform: "uppercase", lineHeight: 0.9, letterSpacing: "-0.01em" }}>
-          Welcome
-          <br />
-          <span className="gradient-text font-display" style={{ fontSize: "4vw", lineHeight: 0.9 }}>Uber / Lyft Riders</span>
-        </h1>
-        <div className="stagger-3" style={{ display: "flex", gap: "3vw" }}>
-          <RatingBadge platform="Uber" rating={4.95} />
-          <RatingBadge platform="Lyft" rating={5.0} />
-        </div>
-        <p className="stagger-4 font-body" style={{ width: "100%", fontSize: "3vw", color: "var(--fg-1)" }}>
-          Sit back, relax, and enjoy the ride.
-        </p>
-      </div>
+      <motion.div custom={0} variants={stagger} initial="hidden" animate="show">
+        <Image src="/assets/web_logo.png" alt="Drew Quevedo" width={400} height={100} className="mx-auto" priority />
+      </motion.div>
+      <motion.h1
+        custom={1}
+        variants={stagger}
+        initial="hidden"
+        animate="show"
+        className="w-full font-display text-5xl lg:text-7xl uppercase leading-[0.9] tracking-tight"
+      >
+        Welcome
+        <br />
+        <GradientText className="font-display text-6xl lg:text-8xl uppercase leading-[0.9]">Uber / Lyft Riders</GradientText>
+      </motion.h1>
+      <motion.p
+        custom={2}
+        variants={stagger}
+        initial="hidden"
+        animate="show"
+        className="w-full font-body text-xl lg:text-3xl text-[var(--fg-1)]"
+      >
+        Sit back, relax, and enjoy the ride.
+      </motion.p>
     </div>
   );
 }
 
 function BrandSlide() {
   return (
-    <div style={{ position: "relative", height: "100%", width: "100%" }}>
-      <SlideBg src="/assets/drew_fam_beach.png" />
-      <div className="slide-content" style={{ gap: "2vw" }}>
-        <div className="stagger-1" style={{ flexShrink: 0 }}>
-          <div style={{ position: "relative", margin: "0 auto", height: "28vw", width: "28vw", overflow: "hidden", borderRadius: "2vw", border: "2px solid rgba(255,255,255,0.2)" }}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/assets/portfolio/drew_tux.png" alt="Drew Quevedo" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-          </div>
+    <div className="flex h-full flex-col items-center justify-center gap-6 px-12 text-center w-full">
+      <SlideBg src="/assets/drew_LAB_COAT_2.png" />
+      <motion.div custom={0} variants={stagger} initial="hidden" animate="show" className="shrink-0">
+        <div className="relative mx-auto h-48 w-48 overflow-hidden rounded-2xl border-4 border-[var(--line)]">
+          <Image src="/assets/portfolio/drew_tux.png" alt="Drew Quevedo" fill className="object-cover" />
         </div>
-        <div className="stagger-2">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/assets/web_logo.png" alt="Drew Quevedo" style={{ margin: "0 auto", width: "80vw", height: "auto" }} />
-        </div>
-        <p className="stagger-3 font-tech" style={{ width: "100%", fontSize: "2.5vw", textTransform: "uppercase", letterSpacing: "0.16em", color: "var(--accent-magenta)" }}>
-          AI Strategist &middot; Creator &middot; People Mover &middot; Family Man
-        </p>
-        <p className="stagger-4 font-body" style={{ width: "100%", fontSize: "3vw", lineHeight: 1.4, margin: "0 auto", maxWidth: "80%", color: "var(--fg-1)" }}>
-          Building high-performance autonomous brand ecosystems powered by Agentic AI Agents, GEO strategy, and cinematic AI design.
-        </p>
-      </div>
+      </motion.div>
+      <motion.div custom={1} variants={stagger} initial="hidden" animate="show">
+        <Image src="/assets/web_logo.png" alt="Drew Quevedo" width={300} height={75} className="mx-auto" />
+      </motion.div>
+      <motion.p custom={2} variants={stagger} initial="hidden" animate="show" className="w-full font-tech text-base lg:text-xl uppercase tracking-[0.16em] text-[var(--accent-magenta)]">
+        AI Strategist &middot; Engineer &middot; Creator &middot; Family Man
+      </motion.p>
+      <motion.p custom={3} variants={stagger} initial="hidden" animate="show" className="w-full max-w-4xl font-body text-xl lg:text-3xl leading-relaxed text-[var(--fg-2)] mx-auto">
+        Building high-performance autonomous brand ecosystems powered by Agentic AI, GEO strategy, and cinematic design.
+      </motion.p>
     </div>
   );
 }
 
 function ServicesSlide() {
   const pillars = [
-    { icon: "\uD83C\uDFAF", label: "GEO Strategy", desc: "Search Optimization" },
-    { icon: "\uD83E\uDD16", label: "Agentic AI", desc: "Autonomous Agents" },
-    { icon: "\u2699\uFE0F", label: "Engineering", desc: "Full-Stack Apps" },
-    { icon: "\uD83C\uDFA8", label: "Creative", desc: "AI Content" },
+    { icon: "🎯", label: "GEO Strategy", desc: "Search Optimization" },
+    { icon: "🤖", label: "Agentic AI", desc: "Autonomous Agents" },
+    { icon: "⚙️", label: "Engineering", desc: "Full-Stack Apps" },
+    { icon: "🎨", label: "Creative", desc: "AI Content" },
   ];
   return (
-    <div style={{ position: "relative", height: "100%", width: "100%" }}>
-      <SlideBg src="/assets/drew_LAB_COAT_2.png" />
-      <div className="slide-content">
-        <div className="stagger-1">
-          <span className="neo-chip" style={{ fontSize: "2.5vw" }}>What I Do</span>
-        </div>
-        <h2 className="stagger-2 font-display" style={{ width: "100%", fontSize: "4vw", textTransform: "uppercase", lineHeight: 0.9 }}>
-          <span className="gradient-text">I Build the Future</span>
-        </h2>
-        <div style={{ display: "grid", width: "80%", margin: "0 auto", gridTemplateColumns: "1fr 1fr", gap: "2vw" }}>
-          {pillars.map((p, i) => (
-            <div key={p.label} className={`neo-card stagger-${i + 3}`} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "1vw", padding: "2vw", backdropFilter: "blur(4px)", background: "rgba(5,6,10,0.6)" }}>
-              <span style={{ fontSize: "4vw" }}>{p.icon}</span>
-              <span className="font-display" style={{ fontSize: "3vw", textTransform: "uppercase", letterSpacing: "0.05em", color: "var(--fg-0)" }}>{p.label}</span>
-              <span className="font-body" style={{ fontSize: "2.5vw", color: "var(--fg-2)" }}>{p.desc}</span>
-            </div>
-          ))}
-        </div>
+    <div className="flex h-full flex-col items-center justify-center gap-8 px-12 text-center w-full">
+      <SlideBg src="/assets/drew_uber_driver.png" />
+      <motion.div custom={0} variants={stagger} initial="hidden" animate="show">
+        <span className="neo-chip text-lg lg:text-xl px-6 py-2">What I Do</span>
+      </motion.div>
+      <motion.h2 custom={1} variants={stagger} initial="hidden" animate="show" className="w-full font-display text-5xl lg:text-7xl uppercase leading-[0.9]">
+        <GradientText>I Build the Future</GradientText>
+      </motion.h2>
+      <div className="grid w-full max-w-5xl grid-cols-2 gap-6 mx-auto">
+        {pillars.map((p, i) => (
+          <motion.div
+            key={p.label}
+            custom={i + 2}
+            variants={stagger}
+            initial="hidden"
+            animate="show"
+            className="neo-card flex flex-col items-center gap-3 p-6"
+          >
+            <span className="text-5xl lg:text-6xl">{p.icon}</span>
+            <span className="font-display text-xl lg:text-2xl uppercase tracking-wide text-[var(--fg-0)]">{p.label}</span>
+            <span className="font-body text-base lg:text-xl text-[var(--fg-2)]">{p.desc}</span>
+          </motion.div>
+        ))}
       </div>
     </div>
   );
 }
 
-function FunFactSlide({ fact }: { fact: { text: string; bgImage: string } }) {
+function FunFactSlide({ fact }: { fact: string }) {
   return (
-    <div style={{ position: "relative", height: "100%", width: "100%" }}>
-      <SlideBg src={fact.bgImage} />
-      <div className="slide-content" style={{ gap: "3vw" }}>
-        <div className="stagger-1" style={{ fontSize: "4vw" }}>{"\uD83E\uDDD0"}</div>
-        <div className="stagger-2">
-          <span className="neo-chip" style={{ fontSize: "2.5vw", borderColor: "rgba(253,184,19,0.5)", color: "#FDB813" }}>Fun Fact</span>
-        </div>
-        <div className="stagger-3 neo-card" style={{ width: "60%", margin: "0 auto", padding: "3vw", borderRadius: 12, backdropFilter: "blur(4px)", background: "rgba(5,6,10,0.65)" }}>
-          <div className="font-body" style={{ fontSize: "3vw", lineHeight: 1.4 }}>
-            <Typewriter text={fact.text} />
-          </div>
-        </div>
+    <div className="flex h-full flex-col items-center justify-center gap-8 px-12 text-center w-full">
+      <SlideBg src="/assets/drew_LAB_COAT_2.png" />
+      <motion.div custom={0} variants={stagger} initial="hidden" animate="show" className="text-6xl lg:text-8xl">
+        🧐
+      </motion.div>
+      <motion.div custom={1} variants={stagger} initial="hidden" animate="show">
+        <span className="neo-chip border-[rgba(253,184,19,0.5)] text-[#FDB813] text-lg lg:text-xl px-6 py-2">Fun Fact</span>
+      </motion.div>
+      <div className="w-full max-w-4xl mx-auto font-body text-3xl lg:text-5xl leading-[1.4] neo-card p-8">
+        <Typewriter text={fact} />
       </div>
     </div>
   );
@@ -272,53 +329,65 @@ function FunFactSlide({ fact }: { fact: { text: string; bgImage: string } }) {
 
 function CaseStudySlide({ id }: { id: string }) {
   const studies: Record<string, {
-    name: string; logo: string; bgImage: string;
-    gradient?: string;
+    name: string;
+    logo: string;
+    logoBg?: string;
     metrics: { value: number; prefix?: string; suffix?: string; label: string }[];
     tagline: string;
   }> = {
     econstruct: {
-      name: "eConstruct Inc", logo: "/assets/portfolio/econstruct_logo.png",
-      bgImage: "/assets/drew_uber_driver.png",
-      gradient: "linear-gradient(to top, #05060a 0%, rgba(5,6,10,0.85) 40%, rgba(5,6,10,0.55) 100%)",
+      name: "eConstruct Inc",
+      logo: "/assets/portfolio/econstruct_logo.png",
+      logoBg: "bg-white/10",
       metrics: [
         { value: 4.2, suffix: "x", label: "GEO Citations", prefix: "" },
         { value: 310, suffix: "%", label: "Organic Traffic", prefix: "+" },
         { value: 1, suffix: "", label: "AI Search Rank", prefix: "#" },
         { value: 3, suffix: "x", label: "Lead Pipeline", prefix: "" },
       ],
-      tagline: "GEO-first strategy for High End Residential Construction, Custom AI Lead Management System, AI CEO Dashboard",
+      tagline: "GEO-first strategy for restaurant construction in LA",
     },
     laso: {
-      name: "Laso Imaging", logo: "/assets/portfolio/laso.png",
-      bgImage: "/assets/drew_uber_driver.png",
+      name: "Laso Imaging",
+      logo: "/assets/portfolio/laso.png",
       metrics: [
         { value: 7, suffix: "", label: "AI Agent Swarm", prefix: "" },
         { value: 85, suffix: "%", label: "Faster Response", prefix: "-" },
         { value: 60, suffix: "hrs", label: "Monthly Saved", prefix: "" },
         { value: 99, suffix: "%", label: "Uptime", prefix: "" },
       ],
-      tagline: "7-Agent AI Swarm \u00B7 CEO Dashboard \u00B7 Shopify Cart",
+      tagline: "7-Agent AI Swarm · CEO Dashboard · Shopify Cart",
     },
   };
   const study = studies[id];
   if (!study) return null;
+
   return (
-    <div style={{ position: "relative", height: "100%", width: "100%" }}>
-      <SlideBg src={study.bgImage} gradient={study.gradient} />
-      <div className="slide-content" style={{ gap: "2vw" }}>
-        <div className="stagger-1"><span className="neo-chip" style={{ fontSize: "2.5vw" }}>Case Study</span></div>
-        <div className="stagger-2" style={{ position: "relative", height: "8vw", width: "24vw", borderRadius: 8 }}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={study.logo} alt={study.name} style={{ width: "100%", height: "100%", objectFit: "contain", padding: 4 }} />
-        </div>
-        <h2 className="stagger-3 font-display" style={{ width: "100%", fontSize: "3vw", textTransform: "uppercase", lineHeight: 0.9 }}>{study.name}</h2>
-        <p className="stagger-4 font-tech" style={{ width: "100%", fontSize: "2.5vw", textTransform: "uppercase", letterSpacing: "0.12em", color: "var(--accent-green)" }}>{study.tagline}</p>
-        <div style={{ display: "grid", width: "70%", margin: "0 auto", gridTemplateColumns: "1fr 1fr", gap: "2vw" }}>
-          {study.metrics.map((m) => (
-            <CountStat key={m.label} value={m.value} prefix={m.prefix} suffix={m.suffix} label={m.label} />
-          ))}
-        </div>
+    <div className="flex h-full flex-col items-center justify-center gap-6 px-12 text-center w-full">
+      <SlideBg src="/assets/portfolio/geo_is_ner_seo_image.jpg" />
+      <motion.div custom={0} variants={stagger} initial="hidden" animate="show">
+        <span className="neo-chip text-lg lg:text-xl px-6 py-2">Case Study</span>
+      </motion.div>
+      <motion.div custom={1} variants={stagger} initial="hidden" animate="show" className={`relative h-24 w-72 ${study.logoBg || ""} rounded-xl p-2`}>
+        <Image src={study.logo} alt={study.name} fill className="object-contain p-2" />
+      </motion.div>
+      <motion.h2 custom={2} variants={stagger} initial="hidden" animate="show" className="w-full font-display text-5xl lg:text-7xl uppercase leading-[0.9]">
+        {study.name}
+      </motion.h2>
+      <motion.p custom={3} variants={stagger} initial="hidden" animate="show" className="w-full font-tech text-base lg:text-xl uppercase tracking-[0.12em] text-[var(--accent-green)]">
+        {study.tagline}
+      </motion.p>
+      <div className="grid w-full max-w-4xl grid-cols-2 gap-6 mx-auto">
+        {study.metrics.map((m, i) => (
+          <CountStat
+            key={m.label}
+            value={m.value}
+            prefix={m.prefix}
+            suffix={m.suffix}
+            label={m.label}
+            delay={600 + i * 200}
+          />
+        ))}
       </div>
     </div>
   );
@@ -326,47 +395,83 @@ function CaseStudySlide({ id }: { id: string }) {
 
 function CreativeSlide() {
   return (
-    <div style={{ position: "relative", height: "100%", width: "100%" }}>
-      <SlideBg src="/assets/portfolio/geo_is_ner_seo_image.jpg" gradient="linear-gradient(to top, #05060a 0%, rgba(5,6,10,0.85) 50%, rgba(5,6,10,0.4) 100%)" />
-      <div className="slide-content" style={{ gap: "2vw" }}>
-        <div className="stagger-1"><span className="neo-chip" style={{ fontSize: "2.5vw", borderColor: "rgba(168,85,247,0.5)", color: "var(--accent-magenta)" }}>Creative AI</span></div>
-        <div className="stagger-2" style={{ position: "relative", width: "40%", margin: "0 auto", overflow: "hidden", borderRadius: 12, border: "1px solid var(--line)", aspectRatio: "16/9" }}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/assets/portfolio/geo_is_ner_seo_image.jpg" alt="GEO Music Video" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.8), transparent)" }} />
-          <div style={{ position: "absolute", bottom: "1.5vw", left: "2vw", right: "2vw", textAlign: "left" }}>
-            <div className="font-display" style={{ fontSize: "2.5vw", textTransform: "uppercase", letterSpacing: "0.05em" }}>GEO is the New SEO</div>
-            <div className="font-tech" style={{ fontSize: "2vw", color: "var(--fg-2)" }}>4K Cinematic AI Music Video</div>
-          </div>
+    <div className="flex h-full flex-col items-center justify-center gap-6 px-12 text-center w-full">
+      <SlideBg src="/assets/portfolio/geo_is_ner_seo_image.jpg" />
+      <motion.div custom={0} variants={stagger} initial="hidden" animate="show">
+        <span className="neo-chip border-[rgba(168,85,247,0.5)] text-[var(--accent-magenta)] text-lg lg:text-xl px-6 py-2">Creative AI</span>
+      </motion.div>
+      <motion.div custom={1} variants={stagger} initial="hidden" animate="show" className="relative w-full max-w-4xl mx-auto overflow-hidden rounded-xl border-2 border-[var(--line)]" style={{ aspectRatio: "16/9" }}>
+        <Image src="/assets/portfolio/geo_is_ner_seo_image.jpg" alt="GEO Music Video" fill className="object-cover" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
+        <div className="absolute bottom-6 left-8 right-8 text-left">
+          <div className="font-display text-3xl lg:text-5xl uppercase tracking-wide">GEO is the New SEO</div>
+          <div className="font-tech text-xl text-[var(--fg-2)]">4K Cinematic AI Music Video</div>
         </div>
-        <h2 className="stagger-3 font-display" style={{ width: "100%", fontSize: "3vw", textTransform: "uppercase", lineHeight: 0.9 }}>
-          Produced in <span style={{ color: "var(--accent-magenta)" }}>1.5 Hours</span> with AI
-        </h2>
-        <p className="stagger-4 font-body" style={{ width: "100%", margin: "0 auto", maxWidth: "80%", fontSize: "3vw", color: "var(--fg-2)" }}>
-          At 5% of traditional cost using OpenArt.ai, Suno, ChatGPT &amp; Whisk
-        </p>
-      </div>
+      </motion.div>
+      <motion.h2 custom={2} variants={stagger} initial="hidden" animate="show" className="w-full font-display text-4xl lg:text-6xl uppercase leading-[0.9]">
+        Produced in <span className="text-[var(--accent-magenta)]">1.5 Hours</span> with AI
+      </motion.h2>
+      <motion.p custom={3} variants={stagger} initial="hidden" animate="show" className="w-full font-body text-2xl lg:text-3xl text-[var(--fg-2)]">
+        At 5% of traditional cost using OpenArt.ai, Suno, ChatGPT &amp; Whisk
+      </motion.p>
+    </div>
+  );
+}
+
+function VideoSlide() {
+  return (
+    <div className="flex h-full flex-col items-center justify-center gap-4 px-12 text-center w-full">
+      <motion.div custom={0} variants={stagger} initial="hidden" animate="show" className="w-full font-display text-2xl lg:text-4xl uppercase tracking-wide text-[var(--fg-1)]">
+        Now Playing &mdash; GEO is the New SEO
+      </motion.div>
+      <motion.div
+        custom={1}
+        variants={stagger}
+        initial="hidden"
+        animate="show"
+        className="relative w-full max-w-6xl mx-auto overflow-hidden rounded-xl border-2 border-[var(--line)]"
+        style={{ aspectRatio: "16/9" }}
+      >
+        <iframe
+          src="https://www.youtube.com/embed/swv_QE6E5X4?autoplay=1&mute=1&loop=1&playlist=swv_QE6E5X4&controls=0&modestbranding=1&rel=0&showinfo=0"
+          title="GEO is the New SEO"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          referrerPolicy="strict-origin-when-cross-origin"
+          allowFullScreen
+          className="absolute inset-0 h-full w-full"
+        />
+      </motion.div>
+      <motion.p custom={2} variants={stagger} initial="hidden" animate="show" className="font-tech text-base lg:text-xl uppercase tracking-[0.15em] text-[var(--fg-2)]">
+        drewquevedo.com
+      </motion.p>
     </div>
   );
 }
 
 function HouseRulesSlide() {
   return (
-    <div style={{ position: "relative", height: "100%", width: "100%" }}>
-      <SlideBg src="/assets/portfolio/drew_superhero_rideshare.jpg" />
-      <div className="slide-content" style={{ gap: "2vw" }}>
-        <div className="stagger-1"><span className="neo-chip" style={{ fontSize: "2.5vw", borderColor: "rgba(253,184,19,0.5)", color: "#FDB813" }}>Rider Vibes</span></div>
-        <h2 className="stagger-2 font-display" style={{ width: "100%", fontSize: "4vw", textTransform: "uppercase", lineHeight: 0.9 }}>
-          <span className="gradient-text">House Rules</span>
-        </h2>
-        <div style={{ width: "70%", display: "flex", flexDirection: "column", gap: "1vw" }}>
-          {HOUSE_RULES.map((r, i) => (
-            <div key={i} className={`neo-card stagger-${i + 3}`} style={{ display: "flex", alignItems: "center", gap: "1.5vw", padding: "1.5vw 2vw", textAlign: "left", backdropFilter: "blur(4px)", background: "rgba(5,6,10,0.6)" }}>
-              <span style={{ fontSize: "3vw", flexShrink: 0 }}>{r.icon}</span>
-              <span className="font-body" style={{ fontSize: "3vw", color: "var(--fg-1)", lineHeight: 1.3 }}>{r.rule}</span>
-            </div>
-          ))}
-        </div>
+    <div className="flex h-full flex-col items-center justify-center gap-6 px-12 text-center w-full">
+      <SlideBg src="/assets/drew_uber_driver.png" />
+      <motion.div custom={0} variants={stagger} initial="hidden" animate="show">
+        <span className="neo-chip border-[rgba(253,184,19,0.5)] text-[#FDB813] text-lg lg:text-xl px-6 py-2">Rider Vibes</span>
+      </motion.div>
+      <motion.h2 custom={1} variants={stagger} initial="hidden" animate="show" className="w-full font-display text-5xl lg:text-7xl uppercase leading-[0.9]">
+        <span className="gradient-text">House Rules</span>
+      </motion.h2>
+      <div className="flex w-full max-w-lg mx-auto flex-col gap-4 mt-4">
+        {HOUSE_RULES.map((r, i) => (
+          <motion.div
+            key={i}
+            custom={i + 2}
+            variants={stagger}
+            initial="hidden"
+            animate="show"
+            className="neo-card flex items-center gap-6 px-8 py-4 text-left"
+          >
+            <span className="text-4xl lg:text-5xl shrink-0">{r.icon}</span>
+            <span className="font-body text-2xl lg:text-3xl text-[var(--fg-1)] leading-tight">{r.rule}</span>
+          </motion.div>
+        ))}
       </div>
     </div>
   );
@@ -374,97 +479,131 @@ function HouseRulesSlide() {
 
 function JokeSlide({ joke }: { joke: { setup: string; punchline: string } }) {
   return (
-    <div style={{ position: "relative", height: "100%", width: "100%" }}>
-      <SlideBg src="/assets/portfolio/drew_kobe_3pointer.jpg" />
-      <div className="slide-content">
-        <div className="stagger-1" style={{ fontSize: "4vw" }}>{"\uD83D\uDE02"}</div>
-        <div className="stagger-2 neo-card font-display" style={{ width: "60%", margin: "0 auto", padding: "3vw", borderRadius: 12, backdropFilter: "blur(4px)", background: "rgba(5,6,10,0.65)", fontSize: "3.5vw", lineHeight: 1.2, letterSpacing: "-0.01em" }}>
-          {joke.setup}
-        </div>
-        <p className="joke-punchline font-display" style={{ width: "80%", margin: "0 auto", fontSize: "4vw", lineHeight: 1.1, color: "#FDB813", textShadow: "0 0 30px rgba(253, 184, 19, 0.4)" }}>
-          {joke.punchline}
-        </p>
-        <div className="stagger-5 font-tech" style={{ width: "100%", fontSize: "2.5vw", textTransform: "uppercase", letterSpacing: "0.18em", color: "var(--fg-2)" }}>
-          Your driver is also a comedian (apparently)
-        </div>
-      </div>
+    <div className="flex h-full flex-col items-center justify-center gap-8 px-12 text-center w-full">
+      <SlideBg src="/assets/drew_driver_sienna.png" />
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.4 }}
+        className="text-6xl lg:text-8xl"
+      >
+        😂
+      </motion.div>
+      <motion.p
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.3, duration: 0.5 }}
+        className="w-full max-w-5xl mx-auto neo-card font-display text-4xl lg:text-6xl p-8 leading-[1.2] tracking-tight"
+      >
+        {joke.setup}
+      </motion.p>
+      <motion.p
+        initial={{ opacity: 0, scale: 0.7, y: 10 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        transition={{ delay: 3, duration: 0.5, type: "spring", stiffness: 200 }}
+        className="w-full font-display text-5xl lg:text-7xl leading-[1.1] text-[#FDB813]"
+        style={{ textShadow: "0 0 30px rgba(253, 184, 19, 0.4)" }}
+      >
+        {joke.punchline}
+      </motion.p>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 4, duration: 0.5 }}
+        className="w-full font-tech text-base lg:text-xl uppercase tracking-[0.18em] text-[var(--fg-2)] mt-4"
+      >
+        Your driver is also a comedian (apparently)
+      </motion.div>
     </div>
   );
 }
 
 function ConnectSlide() {
   return (
-    <div style={{ position: "relative", height: "100%", width: "100%" }}>
-      <SlideBg src="/assets/portfolio/Whisk_jdlmthjowy.jpg" />
-      <div className="slide-content" style={{ gap: "2vw" }}>
-        <div className="stagger-1"><span className="neo-chip" style={{ fontSize: "2.5vw" }}>Connect</span></div>
-        <h2 className="stagger-2 font-display" style={{ width: "100%", fontSize: "4vw", textTransform: "uppercase", lineHeight: 0.9 }}>
-          <span className="gradient-text">Let&apos;s Build Something</span>
-        </h2>
-        <div className="stagger-3" style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-          <div style={{ height: "20vw", width: "20vw", overflow: "hidden", borderRadius: 12 }}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/assets/QR-Code.png" alt="QR Code - drewquevedo.com" style={{ width: "100%", height: "100%", objectFit: "contain" }} />
-          </div>
-          <p className="font-tech" style={{ marginTop: "1vw", fontSize: "2vw", textTransform: "uppercase", letterSpacing: "0.12em", color: "var(--fg-2)" }}>Scan to visit drewquevedo.com</p>
+    <div className="flex h-full flex-col items-center justify-center gap-6 px-12 text-center w-full">
+      <SlideBg src="/assets/drew_LAB_COAT_2.png" />
+      <motion.div custom={0} variants={stagger} initial="hidden" animate="show">
+        <span className="neo-chip text-lg lg:text-xl px-6 py-2">Connect</span>
+      </motion.div>
+      <motion.h2 custom={1} variants={stagger} initial="hidden" animate="show" className="w-full font-display text-5xl lg:text-7xl uppercase leading-[0.9]">
+        <GradientText>Let&apos;s Build Something</GradientText>
+      </motion.h2>
+      <motion.div custom={2} variants={stagger} initial="hidden" animate="show" className="flex flex-col items-center mt-4">
+        <div className="relative h-64 w-64 lg:h-80 lg:w-80 overflow-hidden rounded-2xl bg-white p-2">
+          <Image src="/assets/QR-Code.png" alt="QR Code" fill className="object-contain p-2" />
         </div>
-        <div className="stagger-4 font-tech" style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "2vw", fontSize: "2.5vw", textTransform: "uppercase", letterSpacing: "0.12em", color: "var(--fg-1)" }}>
-          <span>@drewquevedo</span>
-          <span style={{ color: "var(--line)" }}>|</span>
-          <span>dq@drewquevedo.com</span>
-        </div>
-        <div className="stagger-5 font-tech" style={{ fontSize: "2.5vw", textTransform: "uppercase", letterSpacing: "0.12em", color: "var(--fg-2)" }}>
-          LinkedIn &middot; Instagram &middot; YouTube
-        </div>
-      </div>
+        <p className="mt-4 font-tech text-xl uppercase tracking-[0.12em] text-[var(--fg-2)]">Scan to visit drewquevedo.com</p>
+      </motion.div>
+      <motion.div custom={3} variants={stagger} initial="hidden" animate="show" className="flex flex-wrap justify-center gap-4 font-tech text-xl uppercase tracking-[0.12em] text-[var(--fg-1)] mt-4">
+        <span>@drewquevedo</span>
+        <span className="text-[var(--line)]">|</span>
+        <span>dq@drewquevedo.com</span>
+      </motion.div>
+      <motion.div custom={4} variants={stagger} initial="hidden" animate="show" className="font-tech text-xl uppercase tracking-[0.12em] text-[var(--fg-2)]">
+        LinkedIn &middot; Instagram &middot; YouTube
+      </motion.div>
     </div>
   );
 }
 
 function TipsSlide() {
   return (
-    <div style={{ position: "relative", height: "100%", width: "100%" }}>
-      <SlideBg src="/assets/portfolio/drew_meditate_dark.png" />
-      <div className="slide-content" style={{ gap: "2vw" }}>
-        <div className="stagger-1" style={{ fontSize: "4vw" }}>{"\uD83D\uDE4F"}</div>
-        <h2 className="stagger-2 font-display" style={{ width: "100%", fontSize: "4vw", textTransform: "uppercase", lineHeight: 0.9 }}>
-          Tips Are Greatly
-          <br />
-          <span className="shimmer-gold">Appreciated</span>
-        </h2>
-        <div className="stagger-3" style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "1vw" }}>
-          <p className="font-tech" style={{ fontSize: "2.5vw", textTransform: "uppercase", letterSpacing: "0.12em", color: "var(--fg-2)" }}>Cash App</p>
-          <div style={{ height: "20vw", width: "20vw", overflow: "hidden", borderRadius: 8 }}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/assets/Screenshot_20260306_211612_Cash App.jpg" alt="Cash App QR" style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: 8 }} />
-          </div>
-          <p className="font-tech" style={{ fontSize: "5vw", color: "var(--accent-green)" }}>$drewq08</p>
+    <div className="flex h-full flex-col items-center justify-center gap-6 px-12 text-center w-full">
+      <SlideBg src="/assets/drew_uber_driver.png" />
+      <motion.div custom={0} variants={stagger} initial="hidden" animate="show" className="text-6xl lg:text-8xl">
+        🙏
+      </motion.div>
+      <motion.h2 custom={1} variants={stagger} initial="hidden" animate="show" className="w-full font-display text-5xl lg:text-7xl uppercase leading-[0.9]">
+        Tips Are Greatly
+        <br />
+        <span
+          style={{
+            background: "linear-gradient(90deg, #FDB813, #FFD700, #FDB813)",
+            backgroundSize: "200% 100%",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            animation: "shimmerGold 2s linear infinite",
+          }}
+        >
+          Appreciated
+        </span>
+      </motion.h2>
+      <motion.div custom={1.5} variants={stagger} initial="hidden" animate="show" className="flex flex-col items-center gap-4 mt-4">
+        <p className="font-tech text-xl uppercase tracking-[0.12em] text-[var(--fg-2)]">Cash App</p>
+        <div className="relative h-64 w-64 lg:h-80 lg:w-80 overflow-hidden rounded-2xl border-4 border-[#00D632]">
+          <Image src="/assets/Screenshot_20260306_211612_Cash App.jpg" alt="Cash App QR" fill className="object-cover" />
         </div>
-        <p className="stagger-4 font-body" style={{ width: "100%", margin: "0 auto", maxWidth: "80%", fontSize: "3vw", color: "var(--fg-2)" }}>
-          Your generosity keeps this ride experience premium. Thank you!
-        </p>
-      </div>
+        <p className="font-tech text-4xl text-[#00D632] mt-2">$drewq08</p>
+      </motion.div>
+      <motion.p custom={2} variants={stagger} initial="hidden" animate="show" className="w-full max-w-3xl mx-auto font-body text-2xl lg:text-3xl text-[var(--fg-2)] mt-4">
+        Your generosity keeps this ride experience premium. Thank you!
+      </motion.p>
     </div>
   );
 }
 
 function RateSlide() {
   return (
-    <div style={{ position: "relative", height: "100%", width: "100%" }}>
+    <div className="flex h-full flex-col items-center justify-center gap-8 px-12 text-center w-full">
       <SlideBg src="/assets/drew_fam_beach.png" />
-      <div className="slide-content">
-        <div className="stagger-1"><span className="neo-chip" style={{ fontSize: "2.5vw" }}>Uber / Lyft Riders</span></div>
-        <h2 className="wave-text font-display" style={{ width: "100%", fontSize: "4.5vw", textTransform: "uppercase", lineHeight: 0.9 }}>
-          Thanks for Riding!
-        </h2>
-        <p className="stagger-3 font-body" style={{ width: "100%", margin: "0 auto", maxWidth: "80%", fontSize: "3vw", color: "var(--fg-1)" }}>
-          If you enjoyed the experience, a 5-star rating means the world. Have an amazing day!
-        </p>
-        <div className="stagger-4">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/assets/web_logo.png" alt="Drew Quevedo" style={{ margin: "0 auto", width: "70vw", height: "auto", opacity: 0.4 }} />
-        </div>
+      <motion.div custom={0} variants={stagger} initial="hidden" animate="show">
+        <span className="neo-chip text-lg lg:text-xl px-6 py-2">Uber / Lyft Riders</span>
+      </motion.div>
+      <div className="w-full font-display text-6xl lg:text-8xl uppercase leading-[0.9]">
+        <WaveText text="Thanks for Riding!" />
       </div>
+      <motion.p
+        custom={2}
+        variants={stagger}
+        initial="hidden"
+        animate="show"
+        className="w-full max-w-4xl mx-auto font-body text-2xl lg:text-4xl text-[var(--fg-1)]"
+      >
+        If you enjoyed the experience, a 5-star rating means the world. Have an amazing day!
+      </motion.p>
+      <motion.div custom={3} variants={stagger} initial="hidden" animate="show" className="mt-8">
+        <Image src="/assets/web_logo.png" alt="Drew Quevedo" width={250} height={60} className="mx-auto opacity-40" />
+      </motion.div>
     </div>
   );
 }
@@ -477,10 +616,10 @@ export default function AdvertiseDrivePage() {
   const [progress, setProgress] = useState(0);
   const [currentFact, setCurrentFact] = useState(() => pickRandom(FUN_FACTS));
   const [currentJoke, setCurrentJoke] = useState(() => pickRandom(JOKES));
-  const [slideKey, setSlideKey] = useState(0);
   const intervalRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const progressRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
+  // Auto-advance slides
   const advanceSlide = useCallback(() => {
     setCurrent((prev) => {
       const next = (prev + 1) % SLIDES.length;
@@ -492,7 +631,6 @@ export default function AdvertiseDrivePage() {
       if (SLIDES[next]?.type === "joke") setCurrentJoke(pickRandom(JOKES));
       return next;
     });
-    setSlideKey((k) => k + 1);
     setProgress(0);
   }, []);
 
@@ -510,7 +648,7 @@ export default function AdvertiseDrivePage() {
     };
   }, [current, advanceSlide]);
 
-  // Wake Lock (harmless if unsupported)
+  // Wake Lock
   useEffect(() => {
     let wakeLock: WakeLockSentinel | null = null;
     const req = async () => {
@@ -542,6 +680,7 @@ export default function AdvertiseDrivePage() {
       case "funfact": return <FunFactSlide fact={currentFact} />;
       case "casestudy": return <CaseStudySlide id={slide.id} />;
       case "creative": return <CreativeSlide />;
+      case "video": return <VideoSlide />;
       case "houserules": return <HouseRulesSlide />;
       case "joke": return <JokeSlide joke={currentJoke} />;
       case "connect": return <ConnectSlide />;
@@ -552,112 +691,71 @@ export default function AdvertiseDrivePage() {
   }
 
   return (
-    <div style={{ position: "relative", height: "100vh", width: "100vw", overflow: "hidden", background: "var(--bg-0)", color: "#fff" }}>
-      <style>{`
-        @keyframes fadeSlideIn {
-          from { opacity: 0; transform: scale(1.03); }
-          to { opacity: 1; transform: scale(1); }
-        }
-        @keyframes staggerIn {
-          from { opacity: 0; transform: translateY(16px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
+    <div className="relative h-[100dvh] w-screen overflow-hidden bg-[var(--bg-0)] text-white">
+      {/* CSS animations */}
+      <style jsx global>{`
         @keyframes gradientSweep {
           0% { background-position: 0% 50%; }
           100% { background-position: 200% 50%; }
+        }
+        @keyframes neonFlicker {
+          0%, 100% { opacity: 1; }
+          92% { opacity: 1; }
+          93% { opacity: 0.6; }
+          94% { opacity: 1; }
+          96% { opacity: 0.7; }
+          97% { opacity: 1; }
         }
         @keyframes shimmerGold {
           0% { background-position: -200% 50%; }
           100% { background-position: 200% 50%; }
         }
-        @keyframes pulse {
-          0%, 100% { opacity: 1; }
-          50% { opacity: 0; }
-        }
-        @keyframes waveIn {
-          from { opacity: 0; transform: translateY(20px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes punchlineIn {
-          from { opacity: 0; transform: scale(0.7) translateY(10px); }
-          to { opacity: 1; transform: scale(1) translateY(0); }
-        }
-        .slide-active { animation: fadeSlideIn 0.6s ease-out forwards; }
-        .slide-content {
-          position: relative; z-index: 10; display: flex; height: 100%;
-          width: 100%;
-          flex-direction: column; align-items: center; justify-content: center;
-          gap: 3vw; padding: 0 4vw; text-align: center;
-        }
-        .stagger-1 { opacity: 0; animation: staggerIn 0.45s ease-out 0.1s forwards; }
-        .stagger-2 { opacity: 0; animation: staggerIn 0.45s ease-out 0.18s forwards; }
-        .stagger-3 { opacity: 0; animation: staggerIn 0.45s ease-out 0.26s forwards; }
-        .stagger-4 { opacity: 0; animation: staggerIn 0.45s ease-out 0.34s forwards; }
-        .stagger-5 { opacity: 0; animation: staggerIn 0.45s ease-out 0.42s forwards; }
-        .stagger-6 { opacity: 0; animation: staggerIn 0.45s ease-out 0.50s forwards; }
-        .stagger-7 { opacity: 0; animation: staggerIn 0.45s ease-out 0.58s forwards; }
-        .gradient-text {
-          background: linear-gradient(90deg, #7a43e6, #bb8dff, #00D4FF, #7a43e6);
-          background-size: 200% 100%;
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-          animation: gradientSweep 3s linear infinite;
-        }
-        .shimmer-gold {
-          background: linear-gradient(90deg, #FDB813, #FFD700, #FDB813);
-          background-size: 200% 100%;
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-          animation: shimmerGold 2s linear infinite;
-        }
-        .wave-text {
-          opacity: 0;
-          animation: waveIn 0.6s ease-out 0.3s forwards;
-        }
-        .joke-punchline {
-          opacity: 0;
-          animation: punchlineIn 0.5s ease-out 3s forwards;
-        }
       `}</style>
 
-      <div className="pointer-events-none noise-overlay" style={{ position: "fixed", inset: 0, zIndex: 1 }} />
-      <div className="pointer-events-none neo-grid" style={{ position: "fixed", inset: 0, zIndex: 1, opacity: 0.3 }} />
+      {/* Noise overlay */}
+      <div className="pointer-events-none fixed inset-0 z-[1] noise-overlay" />
+      {/* Neo grid */}
+      <div className="pointer-events-none fixed inset-0 z-[1] neo-grid opacity-30" />
+      {/* Radial accent glow */}
       <div
-        style={{
-          position: "fixed", inset: 0, zIndex: 2, pointerEvents: "none",
-          transition: "all 1s",
-          background: `radial-gradient(ellipse 80% 60% at 50% 50%, ${slide.accent}, transparent)`,
-        }}
+        className="pointer-events-none fixed inset-0 z-[2] transition-all duration-1000"
+        style={{ background: `radial-gradient(ellipse 80% 60% at 50% 50%, ${slide.accent}, transparent)` }}
       />
 
-      <div key={slideKey} className="slide-active" style={{ position: "relative", zIndex: 10, height: "100%", width: "100%" }}>
-        {renderSlide()}
-      </div>
+      {/* Slide content */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={slide.id + current}
+          variants={slideVariants}
+          initial="enter"
+          animate="center"
+          exit="exit"
+          transition={{ duration: 0.7, ease: [0.4, 0, 0.2, 1] }}
+          className="relative z-10 h-full w-full"
+        >
+          {renderSlide()}
+        </motion.div>
+      </AnimatePresence>
 
-      <div style={{ position: "fixed", bottom: 0, left: 0, right: 0, zIndex: 50, height: 3, background: "rgba(255,255,255,0.05)" }}>
+      {/* Progress bar */}
+      <div className="fixed bottom-0 left-0 right-0 z-50 h-[4px] bg-white/5">
         <div
+          className="h-full transition-none"
           style={{
-            height: "100%",
             width: `${progress * 100}%`,
             background: "linear-gradient(90deg, var(--accent-magenta), var(--accent-cyan))",
-            boxShadow: "0 0 8px rgba(122, 67, 230, 0.5)",
+            boxShadow: "0 0 12px rgba(122, 67, 230, 0.5)",
           }}
         />
       </div>
 
-      <div style={{ position: "fixed", bottom: 10, left: "50%", transform: "translateX(-50%)", zIndex: 50, display: "flex", gap: 6 }}>
+      {/* Slide indicator dots */}
+      <div className="fixed bottom-3 left-1/2 z-50 flex -translate-x-1/2 gap-2">
         {SLIDES.map((s, i) => (
           <div
             key={s.id}
-            style={{
-              borderRadius: "50%",
-              transition: "all 0.3s",
-              height: 6,
-              width: i === current ? 20 : 6,
-              background: i === current ? "var(--accent-magenta)" : "rgba(255,255,255,0.15)",
-            }}
+            className={`rounded-full transition-all duration-300 ${i === current ? "h-2 w-8 bg-[var(--accent-magenta)]" : "h-2 w-2 bg-white/15"
+              }`}
           />
         ))}
       </div>
