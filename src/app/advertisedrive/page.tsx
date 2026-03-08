@@ -144,10 +144,10 @@ function SlideBg({ src, gradient }: { src: string; gradient?: string }) {
 function CountStat({ value, prefix, suffix, label }: { value: number; prefix?: string; suffix?: string; label: string }) {
   return (
     <div className="neo-card" style={{ padding: "2vw", backdropFilter: "blur(4px)", background: "rgba(5,6,10,0.6)" }}>
-      <div className="font-tech" style={{ fontSize: "8vw", fontWeight: 700, color: "var(--accent-cyan)" }}>
+      <div className="font-tech" style={{ fontSize: "3vw", fontWeight: 700, color: "var(--accent-cyan)" }}>
         {prefix}{Number.isInteger(value) ? value : value.toFixed(1)}{suffix}
       </div>
-      <div className="font-body" style={{ marginTop: 2, fontSize: "10vw", color: "var(--fg-2)" }}>{label}</div>
+      <div className="font-body" style={{ marginTop: 2, fontSize: "2.5vw", color: "var(--fg-2)" }}>{label}</div>
     </div>
   );
 }
@@ -156,8 +156,8 @@ function CountStat({ value, prefix, suffix, label }: { value: number; prefix?: s
 function RatingBadge({ platform, rating }: { platform: string; rating: number }) {
   return (
     <div className="neo-card" style={{ padding: "2vw 3vw", backdropFilter: "blur(4px)", background: "rgba(5,6,10,0.5)" }}>
-      <div className="font-tech" style={{ fontSize: "10vw", textTransform: "uppercase", letterSpacing: "0.12em", color: "var(--fg-2)" }}>{platform}</div>
-      <div className="font-display" style={{ fontSize: "8vw", fontWeight: 700, color: "#FDB813" }}>
+      <div className="font-tech" style={{ fontSize: "2.5vw", textTransform: "uppercase", letterSpacing: "0.12em", color: "var(--fg-2)" }}>{platform}</div>
+      <div className="font-display" style={{ fontSize: "3vw", fontWeight: 700, color: "#FDB813" }}>
         {rating.toFixed(platform === "Lyft" ? 1 : 2)}
       </div>
     </div>
@@ -177,16 +177,16 @@ function WelcomeSlide() {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/assets/web_logo.png" alt="Drew Quevedo" style={{ margin: "0 auto", width: "90vw", height: "auto" }} />
         </div>
-        <h1 className="stagger-2 font-display" style={{ width: "100%", fontSize: "7vw", textTransform: "uppercase", lineHeight: 0.9, letterSpacing: "-0.01em" }}>
+        <h1 className="stagger-2 font-display" style={{ width: "100%", fontSize: "3vw", textTransform: "uppercase", lineHeight: 0.9, letterSpacing: "-0.01em" }}>
           Welcome
           <br />
-          <span className="gradient-text font-display" style={{ fontSize: "9vw", lineHeight: 0.9 }}>Uber / Lyft Riders</span>
+          <span className="gradient-text font-display" style={{ fontSize: "4vw", lineHeight: 0.9 }}>Uber / Lyft Riders</span>
         </h1>
         <div className="stagger-3" style={{ display: "flex", gap: "3vw" }}>
           <RatingBadge platform="Uber" rating={4.95} />
           <RatingBadge platform="Lyft" rating={5.0} />
         </div>
-        <p className="stagger-4 font-body" style={{ width: "100%", fontSize: "12vw", color: "var(--fg-1)" }}>
+        <p className="stagger-4 font-body" style={{ width: "100%", fontSize: "3vw", color: "var(--fg-1)" }}>
           Sit back, relax, and enjoy the ride.
         </p>
       </div>
@@ -209,10 +209,10 @@ function BrandSlide() {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/assets/web_logo.png" alt="Drew Quevedo" style={{ margin: "0 auto", width: "80vw", height: "auto" }} />
         </div>
-        <p className="stagger-3 font-tech" style={{ width: "100%", fontSize: "10vw", textTransform: "uppercase", letterSpacing: "0.16em", color: "var(--accent-magenta)" }}>
+        <p className="stagger-3 font-tech" style={{ width: "100%", fontSize: "2.5vw", textTransform: "uppercase", letterSpacing: "0.16em", color: "var(--accent-magenta)" }}>
           AI Strategist &middot; Creator &middot; People Mover &middot; Family Man
         </p>
-        <p className="stagger-4 font-body" style={{ width: "100%", fontSize: "12vw", lineHeight: 1.4, color: "var(--fg-1)" }}>
+        <p className="stagger-4 font-body" style={{ width: "100%", fontSize: "3vw", lineHeight: 1.4, margin: "0 auto", maxWidth: "80%", color: "var(--fg-1)" }}>
           Building high-performance autonomous brand ecosystems powered by Agentic AI Agents, GEO strategy, and cinematic AI design.
         </p>
       </div>
@@ -232,17 +232,17 @@ function ServicesSlide() {
       <SlideBg src="/assets/drew_LAB_COAT_2.png" />
       <div className="slide-content">
         <div className="stagger-1">
-          <span className="neo-chip" style={{ fontSize: "10vw" }}>What I Do</span>
+          <span className="neo-chip" style={{ fontSize: "2.5vw" }}>What I Do</span>
         </div>
-        <h2 className="stagger-2 font-display" style={{ width: "100%", fontSize: "6vw", textTransform: "uppercase", lineHeight: 0.9 }}>
+        <h2 className="stagger-2 font-display" style={{ width: "100%", fontSize: "4vw", textTransform: "uppercase", lineHeight: 0.9 }}>
           <span className="gradient-text">I Build the Future</span>
         </h2>
-        <div style={{ display: "grid", width: "50%", margin: "0 auto", gridTemplateColumns: "1fr 1fr", gap: "2vw" }}>
+        <div style={{ display: "grid", width: "80%", margin: "0 auto", gridTemplateColumns: "1fr 1fr", gap: "2vw" }}>
           {pillars.map((p, i) => (
-            <div key={p.label} className={`neo-card stagger-${i + 3}`} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "1.5vw", padding: "3vw", backdropFilter: "blur(4px)", background: "rgba(5,6,10,0.6)" }}>
-              <span style={{ fontSize: "8vw" }}>{p.icon}</span>
-              <span className="font-display" style={{ fontSize: "10vw", textTransform: "uppercase", letterSpacing: "0.05em", color: "var(--fg-0)" }}>{p.label}</span>
-              <span className="font-body" style={{ fontSize: "8vw", color: "var(--fg-2)" }}>{p.desc}</span>
+            <div key={p.label} className={`neo-card stagger-${i + 3}`} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "1vw", padding: "2vw", backdropFilter: "blur(4px)", background: "rgba(5,6,10,0.6)" }}>
+              <span style={{ fontSize: "4vw" }}>{p.icon}</span>
+              <span className="font-display" style={{ fontSize: "3vw", textTransform: "uppercase", letterSpacing: "0.05em", color: "var(--fg-0)" }}>{p.label}</span>
+              <span className="font-body" style={{ fontSize: "2.5vw", color: "var(--fg-2)" }}>{p.desc}</span>
             </div>
           ))}
         </div>
@@ -256,12 +256,12 @@ function FunFactSlide({ fact }: { fact: { text: string; bgImage: string } }) {
     <div style={{ position: "relative", height: "100%", width: "100%" }}>
       <SlideBg src={fact.bgImage} />
       <div className="slide-content" style={{ gap: "3vw" }}>
-        <div className="stagger-1" style={{ fontSize: "10vw" }}>{"\uD83E\uDDD0"}</div>
+        <div className="stagger-1" style={{ fontSize: "4vw" }}>{"\uD83E\uDDD0"}</div>
         <div className="stagger-2">
-          <span className="neo-chip" style={{ fontSize: "10vw", borderColor: "rgba(253,184,19,0.5)", color: "#FDB813" }}>Fun Fact</span>
+          <span className="neo-chip" style={{ fontSize: "2.5vw", borderColor: "rgba(253,184,19,0.5)", color: "#FDB813" }}>Fun Fact</span>
         </div>
-        <div className="stagger-3 neo-card" style={{ width: "50%", margin: "0 auto", padding: "4vw", borderRadius: 12, backdropFilter: "blur(4px)", background: "rgba(5,6,10,0.65)" }}>
-          <div className="font-body" style={{ fontSize: "7vw", lineHeight: 1.4 }}>
+        <div className="stagger-3 neo-card" style={{ width: "60%", margin: "0 auto", padding: "3vw", borderRadius: 12, backdropFilter: "blur(4px)", background: "rgba(5,6,10,0.65)" }}>
+          <div className="font-body" style={{ fontSize: "3vw", lineHeight: 1.4 }}>
             <Typewriter text={fact.text} />
           </div>
         </div>
@@ -307,14 +307,14 @@ function CaseStudySlide({ id }: { id: string }) {
     <div style={{ position: "relative", height: "100%", width: "100%" }}>
       <SlideBg src={study.bgImage} gradient={study.gradient} />
       <div className="slide-content" style={{ gap: "2vw" }}>
-        <div className="stagger-1"><span className="neo-chip" style={{ fontSize: "10vw" }}>Case Study</span></div>
-        <div className="stagger-2" style={{ position: "relative", height: "12vw", width: "36vw", borderRadius: 8 }}>
+        <div className="stagger-1"><span className="neo-chip" style={{ fontSize: "2.5vw" }}>Case Study</span></div>
+        <div className="stagger-2" style={{ position: "relative", height: "8vw", width: "24vw", borderRadius: 8 }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={study.logo} alt={study.name} style={{ width: "100%", height: "100%", objectFit: "contain", padding: 4 }} />
         </div>
-        <h2 className="stagger-3 font-display" style={{ width: "100%", fontSize: "5vw", textTransform: "uppercase", lineHeight: 0.9 }}>{study.name}</h2>
-        <p className="stagger-4 font-tech" style={{ width: "100%", fontSize: "10vw", textTransform: "uppercase", letterSpacing: "0.12em", color: "var(--accent-green)" }}>{study.tagline}</p>
-        <div style={{ display: "grid", width: "50%", margin: "0 auto", gridTemplateColumns: "1fr 1fr", gap: "2vw" }}>
+        <h2 className="stagger-3 font-display" style={{ width: "100%", fontSize: "3vw", textTransform: "uppercase", lineHeight: 0.9 }}>{study.name}</h2>
+        <p className="stagger-4 font-tech" style={{ width: "100%", fontSize: "2.5vw", textTransform: "uppercase", letterSpacing: "0.12em", color: "var(--accent-green)" }}>{study.tagline}</p>
+        <div style={{ display: "grid", width: "70%", margin: "0 auto", gridTemplateColumns: "1fr 1fr", gap: "2vw" }}>
           {study.metrics.map((m) => (
             <CountStat key={m.label} value={m.value} prefix={m.prefix} suffix={m.suffix} label={m.label} />
           ))}
@@ -329,20 +329,20 @@ function CreativeSlide() {
     <div style={{ position: "relative", height: "100%", width: "100%" }}>
       <SlideBg src="/assets/portfolio/geo_is_ner_seo_image.jpg" gradient="linear-gradient(to top, #05060a 0%, rgba(5,6,10,0.85) 50%, rgba(5,6,10,0.4) 100%)" />
       <div className="slide-content" style={{ gap: "2vw" }}>
-        <div className="stagger-1"><span className="neo-chip" style={{ fontSize: "10vw", borderColor: "rgba(168,85,247,0.5)", color: "var(--accent-magenta)" }}>Creative AI</span></div>
-        <div className="stagger-2" style={{ position: "relative", width: "50%", margin: "0 auto", overflow: "hidden", borderRadius: 12, border: "1px solid var(--line)", aspectRatio: "16/9" }}>
+        <div className="stagger-1"><span className="neo-chip" style={{ fontSize: "2.5vw", borderColor: "rgba(168,85,247,0.5)", color: "var(--accent-magenta)" }}>Creative AI</span></div>
+        <div className="stagger-2" style={{ position: "relative", width: "40%", margin: "0 auto", overflow: "hidden", borderRadius: 12, border: "1px solid var(--line)", aspectRatio: "16/9" }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/assets/portfolio/geo_is_ner_seo_image.jpg" alt="GEO Music Video" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
           <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.8), transparent)" }} />
-          <div style={{ position: "absolute", bottom: "2vw", left: "3vw", right: "3vw", textAlign: "left" }}>
-            <div className="font-display" style={{ fontSize: "6vw", textTransform: "uppercase", letterSpacing: "0.05em" }}>GEO is the New SEO</div>
-            <div className="font-tech" style={{ fontSize: "10vw", color: "var(--fg-2)" }}>4K Cinematic AI Music Video</div>
+          <div style={{ position: "absolute", bottom: "1.5vw", left: "2vw", right: "2vw", textAlign: "left" }}>
+            <div className="font-display" style={{ fontSize: "2.5vw", textTransform: "uppercase", letterSpacing: "0.05em" }}>GEO is the New SEO</div>
+            <div className="font-tech" style={{ fontSize: "2vw", color: "var(--fg-2)" }}>4K Cinematic AI Music Video</div>
           </div>
         </div>
-        <h2 className="stagger-3 font-display" style={{ width: "100%", fontSize: "5vw", textTransform: "uppercase", lineHeight: 0.9 }}>
+        <h2 className="stagger-3 font-display" style={{ width: "100%", fontSize: "3vw", textTransform: "uppercase", lineHeight: 0.9 }}>
           Produced in <span style={{ color: "var(--accent-magenta)" }}>1.5 Hours</span> with AI
         </h2>
-        <p className="stagger-4 font-body" style={{ width: "100%", fontSize: "12vw", color: "var(--fg-2)" }}>
+        <p className="stagger-4 font-body" style={{ width: "100%", margin: "0 auto", maxWidth: "80%", fontSize: "3vw", color: "var(--fg-2)" }}>
           At 5% of traditional cost using OpenArt.ai, Suno, ChatGPT &amp; Whisk
         </p>
       </div>
@@ -355,15 +355,15 @@ function HouseRulesSlide() {
     <div style={{ position: "relative", height: "100%", width: "100%" }}>
       <SlideBg src="/assets/portfolio/drew_superhero_rideshare.jpg" />
       <div className="slide-content" style={{ gap: "2vw" }}>
-        <div className="stagger-1"><span className="neo-chip" style={{ fontSize: "10vw", borderColor: "rgba(253,184,19,0.5)", color: "#FDB813" }}>Rider Vibes</span></div>
-        <h2 className="stagger-2 font-display" style={{ width: "100%", fontSize: "5vw", textTransform: "uppercase", lineHeight: 0.9 }}>
+        <div className="stagger-1"><span className="neo-chip" style={{ fontSize: "2.5vw", borderColor: "rgba(253,184,19,0.5)", color: "#FDB813" }}>Rider Vibes</span></div>
+        <h2 className="stagger-2 font-display" style={{ width: "100%", fontSize: "4vw", textTransform: "uppercase", lineHeight: 0.9 }}>
           <span className="gradient-text">House Rules</span>
         </h2>
-        <div style={{ width: "50%", display: "flex", flexDirection: "column", gap: "1.5vw" }}>
+        <div style={{ width: "70%", display: "flex", flexDirection: "column", gap: "1vw" }}>
           {HOUSE_RULES.map((r, i) => (
-            <div key={i} className={`neo-card stagger-${i + 3}`} style={{ display: "flex", alignItems: "center", gap: "2vw", padding: "2vw 3vw", textAlign: "left", backdropFilter: "blur(4px)", background: "rgba(5,6,10,0.6)" }}>
-              <span style={{ fontSize: "7vw", flexShrink: 0 }}>{r.icon}</span>
-              <span className="font-body" style={{ fontSize: "12vw", color: "var(--fg-1)", lineHeight: 1.3 }}>{r.rule}</span>
+            <div key={i} className={`neo-card stagger-${i + 3}`} style={{ display: "flex", alignItems: "center", gap: "1.5vw", padding: "1.5vw 2vw", textAlign: "left", backdropFilter: "blur(4px)", background: "rgba(5,6,10,0.6)" }}>
+              <span style={{ fontSize: "3vw", flexShrink: 0 }}>{r.icon}</span>
+              <span className="font-body" style={{ fontSize: "3vw", color: "var(--fg-1)", lineHeight: 1.3 }}>{r.rule}</span>
             </div>
           ))}
         </div>
@@ -377,14 +377,14 @@ function JokeSlide({ joke }: { joke: { setup: string; punchline: string } }) {
     <div style={{ position: "relative", height: "100%", width: "100%" }}>
       <SlideBg src="/assets/portfolio/drew_kobe_3pointer.jpg" />
       <div className="slide-content">
-        <div className="stagger-1" style={{ fontSize: "10vw" }}>{"\uD83D\uDE02"}</div>
-        <div className="stagger-2 neo-card font-display" style={{ width: "50%", margin: "0 auto", padding: "4vw", borderRadius: 12, backdropFilter: "blur(4px)", background: "rgba(5,6,10,0.65)", fontSize: "7vw", lineHeight: 1.2, letterSpacing: "-0.01em" }}>
+        <div className="stagger-1" style={{ fontSize: "4vw" }}>{"\uD83D\uDE02"}</div>
+        <div className="stagger-2 neo-card font-display" style={{ width: "60%", margin: "0 auto", padding: "3vw", borderRadius: 12, backdropFilter: "blur(4px)", background: "rgba(5,6,10,0.65)", fontSize: "3.5vw", lineHeight: 1.2, letterSpacing: "-0.01em" }}>
           {joke.setup}
         </div>
-        <p className="joke-punchline font-display" style={{ width: "100%", fontSize: "9vw", lineHeight: 1.1, color: "#FDB813", textShadow: "0 0 30px rgba(253, 184, 19, 0.4)" }}>
+        <p className="joke-punchline font-display" style={{ width: "80%", margin: "0 auto", fontSize: "4vw", lineHeight: 1.1, color: "#FDB813", textShadow: "0 0 30px rgba(253, 184, 19, 0.4)" }}>
           {joke.punchline}
         </p>
-        <div className="stagger-5 font-tech" style={{ width: "100%", fontSize: "10vw", textTransform: "uppercase", letterSpacing: "0.18em", color: "var(--fg-2)" }}>
+        <div className="stagger-5 font-tech" style={{ width: "100%", fontSize: "2.5vw", textTransform: "uppercase", letterSpacing: "0.18em", color: "var(--fg-2)" }}>
           Your driver is also a comedian (apparently)
         </div>
       </div>
@@ -397,23 +397,23 @@ function ConnectSlide() {
     <div style={{ position: "relative", height: "100%", width: "100%" }}>
       <SlideBg src="/assets/portfolio/Whisk_jdlmthjowy.jpg" />
       <div className="slide-content" style={{ gap: "2vw" }}>
-        <div className="stagger-1"><span className="neo-chip" style={{ fontSize: "10vw" }}>Connect</span></div>
-        <h2 className="stagger-2 font-display" style={{ width: "100%", fontSize: "5.5vw", textTransform: "uppercase", lineHeight: 0.9 }}>
+        <div className="stagger-1"><span className="neo-chip" style={{ fontSize: "2.5vw" }}>Connect</span></div>
+        <h2 className="stagger-2 font-display" style={{ width: "100%", fontSize: "4vw", textTransform: "uppercase", lineHeight: 0.9 }}>
           <span className="gradient-text">Let&apos;s Build Something</span>
         </h2>
         <div className="stagger-3" style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-          <div style={{ height: "32vw", width: "32vw", overflow: "hidden", borderRadius: 12 }}>
+          <div style={{ height: "20vw", width: "20vw", overflow: "hidden", borderRadius: 12 }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/assets/QR-Code.png" alt="QR Code - drewquevedo.com" style={{ width: "100%", height: "100%", objectFit: "contain" }} />
           </div>
-          <p className="font-tech" style={{ marginTop: "2vw", fontSize: "10vw", textTransform: "uppercase", letterSpacing: "0.12em", color: "var(--fg-2)" }}>Scan to visit drewquevedo.com</p>
+          <p className="font-tech" style={{ marginTop: "1vw", fontSize: "2vw", textTransform: "uppercase", letterSpacing: "0.12em", color: "var(--fg-2)" }}>Scan to visit drewquevedo.com</p>
         </div>
-        <div className="stagger-4 font-tech" style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "2vw", fontSize: "10vw", textTransform: "uppercase", letterSpacing: "0.12em", color: "var(--fg-1)" }}>
+        <div className="stagger-4 font-tech" style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "2vw", fontSize: "2.5vw", textTransform: "uppercase", letterSpacing: "0.12em", color: "var(--fg-1)" }}>
           <span>@drewquevedo</span>
           <span style={{ color: "var(--line)" }}>|</span>
           <span>dq@drewquevedo.com</span>
         </div>
-        <div className="stagger-5 font-tech" style={{ fontSize: "10vw", textTransform: "uppercase", letterSpacing: "0.12em", color: "var(--fg-2)" }}>
+        <div className="stagger-5 font-tech" style={{ fontSize: "2.5vw", textTransform: "uppercase", letterSpacing: "0.12em", color: "var(--fg-2)" }}>
           LinkedIn &middot; Instagram &middot; YouTube
         </div>
       </div>
@@ -426,21 +426,21 @@ function TipsSlide() {
     <div style={{ position: "relative", height: "100%", width: "100%" }}>
       <SlideBg src="/assets/portfolio/drew_meditate_dark.png" />
       <div className="slide-content" style={{ gap: "2vw" }}>
-        <div className="stagger-1" style={{ fontSize: "10vw" }}>{"\uD83D\uDE4F"}</div>
-        <h2 className="stagger-2 font-display" style={{ width: "100%", fontSize: "6vw", textTransform: "uppercase", lineHeight: 0.9 }}>
+        <div className="stagger-1" style={{ fontSize: "4vw" }}>{"\uD83D\uDE4F"}</div>
+        <h2 className="stagger-2 font-display" style={{ width: "100%", fontSize: "4vw", textTransform: "uppercase", lineHeight: 0.9 }}>
           Tips Are Greatly
           <br />
           <span className="shimmer-gold">Appreciated</span>
         </h2>
-        <div className="stagger-3" style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "2vw" }}>
-          <p className="font-tech" style={{ fontSize: "10vw", textTransform: "uppercase", letterSpacing: "0.12em", color: "var(--fg-2)" }}>Cash App</p>
-          <div style={{ height: "28vw", width: "28vw", overflow: "hidden", borderRadius: 8 }}>
+        <div className="stagger-3" style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "1vw" }}>
+          <p className="font-tech" style={{ fontSize: "2.5vw", textTransform: "uppercase", letterSpacing: "0.12em", color: "var(--fg-2)" }}>Cash App</p>
+          <div style={{ height: "20vw", width: "20vw", overflow: "hidden", borderRadius: 8 }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/assets/Screenshot_20260306_211612_Cash App.jpg" alt="Cash App QR" style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: 8 }} />
           </div>
-          <p className="font-tech" style={{ fontSize: "14vw", color: "var(--accent-green)" }}>$drewq08</p>
+          <p className="font-tech" style={{ fontSize: "5vw", color: "var(--accent-green)" }}>$drewq08</p>
         </div>
-        <p className="stagger-4 font-body" style={{ width: "100%", fontSize: "12vw", color: "var(--fg-2)" }}>
+        <p className="stagger-4 font-body" style={{ width: "100%", margin: "0 auto", maxWidth: "80%", fontSize: "3vw", color: "var(--fg-2)" }}>
           Your generosity keeps this ride experience premium. Thank you!
         </p>
       </div>
@@ -453,11 +453,11 @@ function RateSlide() {
     <div style={{ position: "relative", height: "100%", width: "100%" }}>
       <SlideBg src="/assets/drew_fam_beach.png" />
       <div className="slide-content">
-        <div className="stagger-1"><span className="neo-chip" style={{ fontSize: "10vw" }}>Uber / Lyft Riders</span></div>
-        <h2 className="wave-text font-display" style={{ width: "100%", fontSize: "6vw", textTransform: "uppercase", lineHeight: 0.9 }}>
+        <div className="stagger-1"><span className="neo-chip" style={{ fontSize: "2.5vw" }}>Uber / Lyft Riders</span></div>
+        <h2 className="wave-text font-display" style={{ width: "100%", fontSize: "4.5vw", textTransform: "uppercase", lineHeight: 0.9 }}>
           Thanks for Riding!
         </h2>
-        <p className="stagger-3 font-body" style={{ width: "100%", fontSize: "12vw", color: "var(--fg-1)" }}>
+        <p className="stagger-3 font-body" style={{ width: "100%", margin: "0 auto", maxWidth: "80%", fontSize: "3vw", color: "var(--fg-1)" }}>
           If you enjoyed the experience, a 5-star rating means the world. Have an amazing day!
         </p>
         <div className="stagger-4">
