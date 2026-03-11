@@ -27,8 +27,14 @@ export default function BookStrategyPage() {
           <p className="mt-6 font-body text-lg leading-relaxed text-[var(--fg-2)]">
             Secure a 1-on-1 session to blueprint your transition from standard operations to autonomous growth.
           </p>
-          <div className="mt-12 mx-auto max-w-md h-[500px] border border-white/10 rounded-2xl bg-white/5 flex items-center justify-center font-tech text-xs text-white/50">
-            [ Cal.com / Scheduling Widget Integration pending ]
+          <div className="mt-12 mx-auto w-full max-w-4xl h-[650px] overflow-hidden rounded-2xl bg-white/5 border border-white/10">
+            <iframe 
+              src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ0E6ol4V54QwhDV-8RdF-bm4oJWdcx4VArEhJA03iLu15OqYTXm8XPtfPTHb4dEilQxDgsUYf4g?gv=true" 
+              style={{ border: 0 }} 
+              width="100%" 
+              height="100%" 
+              frameBorder="0"
+            />
           </div>
         </motion.div>
       </main>
