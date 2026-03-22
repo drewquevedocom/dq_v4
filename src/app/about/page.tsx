@@ -84,7 +84,7 @@ export default function AboutPage() {
                             To survive over two decades in the most volatile digital trenches on earth requires complete offline stillness. As the Founder of AgentIQAgents and the AI Digital Marketing Manager at Econstruct Inc., my professional output is entirely sustained by extreme wellness protocols and unapologetic family prioritization.
                         </p>
                         <p>
-                            I build from stillness first, then scale with precision. This philosophy is forged through rigorous physical discipline: routine ice submersion therapy (face and cold showers), intense swimming, Los Angeles cycling routes, heavy weight training, and strict metabolic fasting protocols spanning from daily 2PM-8PM windows to intense 14-day zero-calorie purges.
+                            I build from stillness first, then scale with precision. This philosophy is forged through rigorous physical discipline: routine ice submersion therapy (face and cold showers), early am meditation, fascia training, beach bike rides, swimming, ride my electric skateboard, and strict metabolic fasting protocols spanning from daily 2PM-8PM windows to intense 14-day zero-calorie purges.
                         </p>
                         <p>
                             When I am not training LLMs or building <strong>Generative Engine Optimization (GEO)</strong> pipelines, I am a die-hard Los Angeles Lakers fan, a competitive paintball aggressive player, and absolutely dedicated to playing weekend pickleball with my kids. This is the foundation of my scale.

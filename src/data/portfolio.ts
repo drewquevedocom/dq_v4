@@ -666,5 +666,100 @@ While pure code offers ultimate flexibility, n8n provides a visual orchestration
 <p><strong>How does Jarvis access the internet?</strong><br/>
 Within the n8n workflow, I supply the LangChain agent with a specific "SerpAPI Tool" and a "Web Scraper Tool." The LLM natively understands how to format the JSON requests to trigger these nodes when its reasoning loop determines it needs live data.</p>
     `
+  },
+  {
+    slug: "fixman-appliance-repair",
+    title: "FixMan Appliance Repair",
+    tagline: "Full digital growth engine for local appliance repair.",
+    description:
+      "End-to-end digital transformation for a 5-star appliance repair business in Thousand Oaks, CA — from zero web presence to a GEO-optimized website, AI phone receptionist, automated review generation, and local SEO domination strategy.",
+    category: "strategy",
+    technologies: ["Next.js", "GEO/AEO", "Voice AI", "Schema Markup", "Local SEO", "SMS Automation"],
+    results: [
+      { label: "Google Reviews Target", value: "50+" },
+      { label: "Yelp Rating", value: "5.0★" },
+      { label: "Yelp Reviews", value: "356" },
+      { label: "Expected Monthly Leads", value: "15-30" },
+    ],
+    challenge:
+      "FixMan had a flawless 5.0-star rating across 356 Yelp reviews but only 4 Google reviews and zero web presence. Competitors with inferior service were outranking them in Google Maps and AI search results simply because they had established digital footprints.",
+    solution:
+      "We designed and deployed a full 5-point digital growth engine: (1) a mobile-first professional website with schema markup for local SEO, (2) Google Business Profile optimization targeting 'appliance repair Thousand Oaks' and surrounding cities, (3) an AI phone receptionist that answers calls 24/7, books appointments, and handles FAQs, (4) an automated SMS-based review generation system to migrate their stellar Yelp reputation to Google, and (5) a monthly content and SEO strategy to build domain authority.",
+    outcome:
+      "FixMan launched with a professional digital presence covering Thousand Oaks, Westlake Village, Agoura Hills, and 6 other Conejo Valley cities. The AI receptionist captures leads during jobs and after-hours. The review engine targets 50+ Google reviews in 6 months. Projected ROI: break-even at just 2 additional service calls per month, with 15-30 new monthly leads expected.",
+    image: "/assets/portfolio/fixman.png",
+    externalUrl: "https://drewquevedocom.github.io/FixMan/",
+    accentColor: "#FF6B35",
+    featured: true,
+    imageBg: "white",
+    imageContain: true,
+    seoSchema: `
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://drewquevedo.com/case-studies/fixman-appliance-repair"
+      },
+      "headline": "FixMan Appliance Repair: From Zero Web Presence to Local AI-Powered Growth Engine",
+      "description": "How a 5-star appliance repair business in Thousand Oaks got a full digital growth engine — website, AI receptionist, review automation, and GEO strategy.",
+      "image": "https://drewquevedo.com/assets/portfolio/fixman.png",
+      "author": {
+        "@type": "Person",
+        "name": "Drew Quevedo"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "AgentIQ",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://drewquevedo.com/logo.png"
+        }
+      },
+      "datePublished": "2026-03-21",
+      "dateModified": "2026-03-21"
+    }
+    `,
+    fullContent: `
+<h2>The Challenge: Invisible Online Despite 356 Five-Star Reviews</h2>
+<p><strong>FixMan Appliance Repair</strong>, operated by Vlad in Thousand Oaks, California, is the definition of a business built on exceptional service. With a perfect 5.0-star rating across 356 Yelp reviews, FixMan had earned the trust of the entire Conejo Valley through years of reliable, same-day appliance repair for refrigerators, washers, dryers, ovens, HVAC systems, and more.</p>
+<p>But there was a critical problem: FixMan had <strong>zero web presence</strong> and only <strong>4 Google reviews</strong>. In 2026, when homeowners ask Google, ChatGPT, or Perplexity "Who's the best appliance repair near me?", FixMan was invisible. Competitors like AMPM Appliances and Allstar — with inferior service but better digital footprints — were capturing the leads that should have been FixMan's.</p>
+
+<h2>The 5-Point Digital Growth Engine</h2>
+<p>We didn't just build a website — we engineered a complete AI-powered growth engine designed to turn FixMan's exceptional reputation into digital dominance.</p>
+
+<h3>1. Professional Mobile-First Website</h3>
+<p>A conversion-optimized landing page featuring service listings for all major appliance brands (Samsung, LG, Whirlpool, GE, and more), customer testimonials, service area coverage across 9 cities, and prominent click-to-call CTAs. Built with schema markup for LocalBusiness, Service, and FAQ entities to feed Google's Knowledge Graph and AI search engines.</p>
+
+<h3>2. Local SEO & Google Business Profile Domination</h3>
+<p>Full GBP optimization targeting high-intent keywords like "appliance repair Thousand Oaks," "refrigerator repair Westlake Village," and "washer repair Conejo Valley." Goal: first-page Google Maps ranking within 90 days across all 9 service cities.</p>
+
+<h3>3. AI Phone Receptionist (24/7)</h3>
+<p>A Voice AI agent deployed to answer every call — during jobs, after hours, weekends. The agent books appointments, handles FAQs about pricing and service areas, and captures lead information that would otherwise be lost when Vlad is elbow-deep in a dishwasher repair.</p>
+
+<h3>4. Automated Review Generation Engine</h3>
+<p>An SMS-based system that automatically texts customers after service completion with a direct link to leave a Google review. The goal: migrate FixMan's stellar Yelp reputation to Google with 50+ reviews in 6 months. This is the single highest-leverage move for local SEO.</p>
+
+<h3>5. Monthly Content & SEO Strategy</h3>
+<p>Ongoing blog content targeting local search terms and seasonal appliance repair queries, positioning FixMan as the Conejo Valley's undisputed expert in appliance repair.</p>
+
+<h2>The ROI Math</h2>
+<p>With an average service call value of $150–$250, FixMan breaks even on the entire growth engine investment with just <strong>2 additional service calls per month</strong>. The projected outcome is <strong>15–30+ new leads monthly</strong> — a conservative estimate given the combination of SEO visibility, AI-captured calls, and review-driven trust signals.</p>
+
+<h2>Service Coverage</h2>
+<p>FixMan serves the entire Conejo Valley region: Thousand Oaks, Westlake Village, Agoura Hills, Newbury Park, Camarillo, Moorpark, Simi Valley, Oak Park, and Calabasas.</p>
+
+<hr class="my-12 border-[var(--line)]" />
+
+<h2>Q&A</h2>
+<p><strong>Why did FixMan need a website when they had 356 Yelp reviews?</strong><br/>
+Yelp reviews don't transfer to Google Search, Google Maps, or AI search engines. Without a website and Google reviews, FixMan was invisible to the majority of customers who search via Google or ask AI assistants for recommendations.</p>
+
+<p><strong>How does the AI phone receptionist work?</strong><br/>
+The Voice AI agent answers calls using natural conversation, understands service requests, checks availability, books appointments, and captures lead details — all without human intervention. It handles after-hours calls, busy periods, and FAQs about pricing and service areas.</p>
+
+<p><strong>What makes this different from just building a website?</strong><br/>
+A website alone is a digital brochure. This is a 5-point growth engine that combines web presence, local SEO, AI automation, reputation management, and content strategy into a single system that compounds over time.</p>
+    `
   }
 ];
